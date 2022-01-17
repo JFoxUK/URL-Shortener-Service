@@ -57,7 +57,6 @@ router.get('/r/:shortUrl', function(req, res) {
     res.redirect(responseFromDatabase.longUrl);
   }else{
     console.log('URL NOT FOUND REDIRECTING TO INDEX.PUG');
-    res.render("index.pug");
   }
   //res.redirect(redirectUrl);
   //if logic for error
