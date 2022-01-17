@@ -1,11 +1,16 @@
 // BASE SETUP
 // ==============================================
-
 var express = require('express');
 var app     = express();
 var router  = express.Router();
 var port    =   process.env.PORT || 8080;
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const { Pool, Client } = require('pg');
+var connectionString = 'postgres://mxfgeiwmtsinyn:fce937a24157382ec405769ab330d81db098b9b3ef42f7f42e7a7846fd749b7a@ec2-44-199-52-133.compute-1.amazonaws.com:5432/d3f2tu5e6sgsfq'
+const pool = new Pool({
+  connectionString,
+})
+
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -18,7 +23,6 @@ app.use(express.static(__dirname + '/views/includes/public'));
 
 // ROUTES
 // ==============================================
-
 router.use(function(req, res, next) {
   console.log(req.method, req.url);
   next();
@@ -44,9 +48,9 @@ router.post('/create', function(req, res) {
 router.get('/r/:shortUrl', function(req, res) {
   console.log('I need to redirect to the real URL');
   console.log('THE SHORT URL HERE IS >> ' + req.params.shortUrl);
-  //Query database
-  //IF EXISTS > REDIRECT
-  //IF NOT, THORW ERROR MESSAGE
+  let redirectUrl = checkDatabase(req.params.shortUrl);
+  //res.redirect(redirectUrl);
+  //if logic for error
 });
 
 // apply the routes to our application
@@ -54,7 +58,22 @@ app.use('/', router);
 
 
 
+// Database Functions
+// ==============================================
+function checkDatabase(shortUrl) {
+  let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
+  let queryString = queryStringStandard + shortUrl.replace(/[^A-Z0-9]/ig, "");
+  pool.query(queryString)
+  .then(res => {
+    console.log(res);
+  })
+  .catch(e => console.error(e.stack))
+  
+};
+
+
 // START THE SERVER
 // ==============================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
+
