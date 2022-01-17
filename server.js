@@ -74,8 +74,8 @@ function checkDatabase(shortUrl) {
   let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
   console.log('QUERY >> ' + queryString);
   let responseToReturn = {
-    valid = false,
-    longUrl = null
+    valid: false,
+    longUrl: null
   };
   pool.query(queryString)
   .then(res => {
