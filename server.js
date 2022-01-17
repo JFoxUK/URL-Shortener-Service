@@ -52,7 +52,13 @@ router.post('/create', function(req, res) {
 router.get('/r/:shortUrl', function(req, res) {
   console.log('I need to redirect to the real URL');
   console.log('THE SHORT URL HERE IS >> ' + req.params.shortUrl);
-  let redirectUrl = checkDatabase(req.params.shortUrl);
+  let responseFromDatabase = checkDatabase(req.params.shortUrl);
+  if(responseFromDatabase.valid){
+    res.redirect(responseFromDatabase.longUrl);
+  }else{
+    console.log('URL NOT FOUND REDIRECTING TO INDEX.PUG');
+    res.render("index.pug");
+  }
   //res.redirect(redirectUrl);
   //if logic for error
 });
@@ -68,12 +74,22 @@ function checkDatabase(shortUrl) {
   let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
   let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
   console.log('QUERY >> ' + queryString);
+  let responseToReturn = {
+    valid = false,
+    longUrl = null
+  };
   pool.query(queryString)
   .then(res => {
     console.log(res);
+    responseToReturn.valid = true;
+    responseToReturn.longUrl = res.rows[0].long_url;
   })
-  .catch(e => console.error(e.stack))
-  
+  .catch(e => {
+    console.error(e.stack);
+    responseToReturn.valid = false;
+  })
+
+  return responseToReturn;
 };
 
 
