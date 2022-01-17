@@ -66,7 +66,7 @@ app.use('/', router);
 // ==============================================
 function checkDatabase(shortUrl) {
   let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
-  let queryString = queryStringStandard + shortUrl.replace(/[^A-Z0-9]/ig, "");
+  let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
   console.log('QUERY >> ' + queryString);
   pool.query(queryString)
   .then(res => {
