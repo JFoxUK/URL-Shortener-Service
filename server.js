@@ -6,10 +6,14 @@ var router  = express.Router();
 var port    =   process.env.PORT || 8080;
 var bodyParser = require('body-parser');
 const { Pool, Client } = require('pg');
-var connectionString = 'postgres://mxfgeiwmtsinyn:fce937a24157382ec405769ab330d81db098b9b3ef42f7f42e7a7846fd749b7a@ec2-44-199-52-133.compute-1.amazonaws.com:5432/d3f2tu5e6sgsfq'
-const pool = new Pool({
-  connectionString,
-})
+const connectionString = {
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+};
+  
+
+const pool = new Pool(connectionString);
+pool.on('connect', () => console.log('connected to db'));
 
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
