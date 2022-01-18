@@ -95,10 +95,15 @@ function checkDatabase(shortUrl) {
   console.log('**Querying DB with POOL');
   pool.query(queryString)
   .then(res => {
+    console.log('**Entering THEN');
+    console.log('**Record ' + res.rows[0]);
+    console.log('**Record long_url ' + res.rows[0].long_url);
     responseToReturn.valid = true;
     responseToReturn.longUrl = res.rows[0].long_url;
   })
   .catch(e => {
+    console.log('**Entering CATCH');
+    console.error(e);
     responseToReturn.valid = false;
   })
 
