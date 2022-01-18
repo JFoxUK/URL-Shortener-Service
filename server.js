@@ -53,7 +53,7 @@ router.get('/r/:shortUrl', function(req, res) {
   console.log('I need to redirect to the real URL');
   console.log('THE SHORT URL HERE IS >> ' + req.params.shortUrl);
   let responseFromDatabase = checkDatabase(req.params.shortUrl);
-  console.log('responseFromDatabase object == ??  ' + responseFromDatabases);
+  console.log('responseFromDatabase object == ??  ' + responseFromDatabase);
   if(responseFromDatabase.valid){
     console.log('VALID - TRUE AND URL IS  == ??  ' + responseFromDatabase.longUrl);
     res.redirect(responseFromDatabase.longUrl);
@@ -86,7 +86,6 @@ function checkDatabase(shortUrl) {
     responseToReturn.longUrl = res.rows[0].long_url;
   })
   .catch(e => {
-    console.error(e.stack);
     responseToReturn.valid = false;
   })
 
