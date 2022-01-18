@@ -90,6 +90,7 @@ function checkDatabase(shortUrl) {
     responseToReturn.valid = false;
   })
 
+  console.log(responseToReturn);
   return responseToReturn;
 };
 
