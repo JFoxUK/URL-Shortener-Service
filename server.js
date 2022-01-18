@@ -77,15 +77,14 @@ function checkDatabase(shortUrl) {
   console.log('**Querying DB with POOL');
   pool.query(queryString)
   .then(res => {
-    
+    console.log(res.rows[0].long_url);
+    Promise.resolve(res.rows[0].long_url);
   })
   .catch(e => {
     console.error(e);
-    throw Error ('No record found') 
+    Promise.reject('No record found');
   })
 
-  console.log(res.rows[0].long_url);
-  return res.rows[0].long_url;;
 };
 
 
