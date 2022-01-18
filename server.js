@@ -75,16 +75,8 @@ app.use('/', router);
 
 // Database Functions
 // ==============================================
-function connectToDB(){
-  console.log('**ENTERING connectToDB');
-  const pool = new Pool(connectionString);
-  pool.on('connect', () => console.log('connected to db'));
-  return pool;
-}
-
 function checkDatabase(shortUrl) {
   console.log('**ENTERING checkDatabase');
-  let pool = connectToDB();
   let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
   let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
   let responseToReturn = {
@@ -116,4 +108,7 @@ function checkDatabase(shortUrl) {
 // ==============================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
+
+const pool = new Pool(connectionString);
+pool.on('connect', () => console.log('connected to db'));
 
