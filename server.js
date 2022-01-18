@@ -55,6 +55,7 @@ router.get('/r/:shortUrl', function(req, res) {
   let responseFromDatabase = checkDatabase(req.params.shortUrl);
   console.log('responseFromDatabase object == ??  ' + responseFromDatabases);
   if(responseFromDatabase.valid){
+    console.log('VALID - TRUE AND URL IS  == ??  ' + responseFromDatabase.longUrl);
     res.redirect(responseFromDatabase.longUrl);
   }else{
     console.log('URL NOT FOUND REDIRECTING TO INDEX.PUG');
