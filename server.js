@@ -69,23 +69,33 @@ app.use('/', router);
 
 // Database Functions
 // ==============================================
-function checkDatabase(shortUrl) {
+var checkDatabase = new Promise(function(resolve, reject, shortUrl) {
   console.log('**ENTERING checkDatabase');
   let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
   let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
-  console.log('**Querying DB with POOL');
-  pool.query(queryString)
+  connectkDatabase()
   .then(res => {
-    console.log(res.rows[0].long_url);
-    Promise.resolve(res.rows[0].long_url);
+    console.log('**Querying DB with POOL');
+    pool.query(queryString)
+    .then(res => {
+      console.log(res.rows[0].long_url);
+      resolve(res.rows[0].long_url);
+    })
+    .catch(e => {
+      console.error(e);
+      reject('No record found');
+    })
   })
-  .catch(e => {
-    console.error(e);
-    Promise.reject('No record found');
-  })
+  
 
-};
+});
+
+var connectkDatabase = new Promise(function(resolve, reject){
+  const pool = new Pool(connectionString);
+  pool.on('connect', () => console.log('connected to db'));
+  resolve(pool);
+});
 
 
 // START THE SERVER
@@ -93,6 +103,5 @@ function checkDatabase(shortUrl) {
 app.listen(port);
 console.log('Magic happens on port ' + port);
 
-const pool = new Pool(connectionString);
-pool.on('connect', () => console.log('connected to db'));
+
 
