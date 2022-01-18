@@ -12,8 +12,7 @@ const connectionString = {
 };
   
 
-const pool = new Pool(connectionString);
-pool.on('connect', () => console.log('connected to db'));
+
 
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -50,14 +49,19 @@ router.post('/create', function(req, res) {
 
 
 router.get('/r/:shortUrl', function(req, res) {
-  console.log('I need to redirect to the real URL');
-  console.log('THE SHORT URL HERE IS >> ' + req.params.shortUrl);
+
+  console.log('**ENTERING shortURL Route');
+  console.log('**Calling CheckDatabase');
   let responseFromDatabase = checkDatabase(req.params.shortUrl);
+
   console.log('responseFromDatabase object == ??  ' + responseFromDatabase);
+
   if(responseFromDatabase.valid){
+    console.log('**ENTERING If');
     console.log('VALID - TRUE AND URL IS  == ??  ' + responseFromDatabase.longUrl);
     res.redirect(responseFromDatabase.longUrl);
   }else{
+    console.log('**ENTERING Else');
     console.log('URL NOT FOUND REDIRECTING TO INDEX.PUG');
   }
   //res.redirect(redirectUrl);
@@ -71,17 +75,26 @@ app.use('/', router);
 
 // Database Functions
 // ==============================================
+function connectToDB(){
+  console.log('**ENTERING connectToDB');
+  const pool = new Pool(connectionString);
+  pool.on('connect', () => console.log('connected to db'));
+  return pool;
+}
+
 function checkDatabase(shortUrl) {
+  console.log('**ENTERING checkDatabase');
+  let pool = connectToDB();
   let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
   let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
-  console.log('QUERY >> ' + queryString);
   let responseToReturn = {
     valid: false,
     longUrl: null
   };
+
+  console.log('**Querying DB with POOL');
   pool.query(queryString)
   .then(res => {
-    console.log(res);
     responseToReturn.valid = true;
     responseToReturn.longUrl = res.rows[0].long_url;
   })
