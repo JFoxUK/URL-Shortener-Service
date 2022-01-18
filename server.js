@@ -52,20 +52,14 @@ router.get('/r/:shortUrl', function(req, res) {
 
   console.log('**ENTERING shortURL Route');
   console.log('**Calling CheckDatabase');
-  let responseFromDatabase = checkDatabase(req.params.shortUrl);
-
-  console.log('responseFromDatabase object == ??  ' + responseFromDatabase);
-
-  if(responseFromDatabase.valid){
-    console.log('**ENTERING If');
-    console.log('VALID - TRUE AND URL IS  == ??  ' + responseFromDatabase.longUrl);
-    res.redirect(responseFromDatabase.longUrl);
-  }else{
-    console.log('**ENTERING Else');
-    console.log('URL NOT FOUND REDIRECTING TO INDEX.PUG');
-  }
-  //res.redirect(redirectUrl);
-  //if logic for error
+  checkDatabase(req.params.shortUrl)
+  .then( res => {
+    res.redirect(res);
+  })
+  .catch(e => {
+    console.error(e);
+    res.render("index.pug");
+  })
 });
 
 // apply the routes to our application
@@ -79,28 +73,19 @@ function checkDatabase(shortUrl) {
   console.log('**ENTERING checkDatabase');
   let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
   let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
-  let responseToReturn = {
-    valid: false,
-    longUrl: null
-  };
 
   console.log('**Querying DB with POOL');
   pool.query(queryString)
   .then(res => {
-    console.log('**Entering THEN');
-    console.log('**Record ' + res.rows[0]);
-    console.log('**Record long_url ' + res.rows[0].long_url);
-    responseToReturn.valid = true;
-    responseToReturn.longUrl = res.rows[0].long_url;
+    
   })
   .catch(e => {
-    console.log('**Entering CATCH');
     console.error(e);
-    responseToReturn.valid = false;
+    throw Error ('No record found') 
   })
 
-  console.log(responseToReturn);
-  return responseToReturn;
+  console.log(res.rows[0].long_url);
+  return res.rows[0].long_url;;
 };
 
 
