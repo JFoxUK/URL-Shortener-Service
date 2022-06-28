@@ -42,6 +42,7 @@ router.post('/create', function(req, res) {
   console.log('Call me to create');
   var longUrl = req.body.longUrl;
   console.log(longUrl);
+  res.send('POST request to the homepage')
 });
 
 
