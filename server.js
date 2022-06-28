@@ -48,15 +48,18 @@ router.post('/create', function(req, res) {
 router.get('/r/:shortUrl', function(req, res) {
 
   //CONNECT AND CHECK
-  checkDatabase(req.params.shortUrl)
-  .then( res => {
-    res.redirect(res);
-  })
-  .catch(e => {
-    console.error(e);
-    res.render("index.pug");
-  })
-});
+  connectDatabase.then(
+    checkDatabase(req.params.shortUrl)
+    .then( res => {
+      res.redirect(res);
+    })
+    .catch(e => {
+      console.error(e);
+      res.render("index.pug");
+    })
+
+    )
+  });
 
 // apply the routes to our application
 app.use('/', router);
