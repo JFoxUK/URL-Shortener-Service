@@ -53,6 +53,7 @@ router.get('/r/:shortUrl', function(req, res) {
     checkDatabase(req.params.shortUrl)
     .then( res => {
       console.log('checkdatdabase .then');
+      console.log('checkdatdabase res => ' + res);
       res.redirect(res);
     })
     .catch(e => {
