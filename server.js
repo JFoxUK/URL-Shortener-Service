@@ -36,8 +36,21 @@ router.get('/home', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
-  var longUrl = req.body.longUrl;
-  res.send('POST request to the homepage')
+  let longUrl = req.body.longUrl;
+
+  let datdabaseRes;
+  let databaseFunctionError;
+  connectDatabase.then(
+    checkDatabase(req.params.shortUrl)
+      .then( datdabaseRes => {
+        console.log('RECORD ALREADY EXISTS - ' + datdabaseRes);
+      })
+      .catch(e => {
+        databaseFunctionError = e;
+        console.error(databaseFunctionError);
+      })
+  )
+
 });
 
 
