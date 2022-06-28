@@ -78,14 +78,14 @@ var connectDatabase = new Promise(function(resolve, reject){
   }
 });
 
-var checkDatabase = async function(shortUrl) {
+var checkDatabase = function(shortUrl) {
   
   return new Promise(function(resolve, reject){
     console.log('**ENTERING checkDatabase');
     let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
     let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
-    await pool.query(queryString)
+    pool.query(queryString)
     .then(res => {
       resolve(res.rows[0].long_url);
     })
