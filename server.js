@@ -54,7 +54,7 @@ router.get('/r/:shortUrl', function(req, res) {
     .then( res => {
       console.log('checkdatdabase .then');
       console.log('checkdatdabase res => ' + res);
-      res.redirect(res);
+      res.redirect(res.toString());
     })
     .catch(e => {
       console.error(e);
