@@ -91,6 +91,8 @@ var checkDatabase = function(shortUrl) {
 
     pool.query(queryString)
     .then(res => {
+      console.log('Pool query res -> ' + res);
+      console.log('Pool queryres.rows[0].long_url ->' + res.rows[0].long_url)
       resolve(res.rows[0].long_url);
     })
     .catch(e => {
