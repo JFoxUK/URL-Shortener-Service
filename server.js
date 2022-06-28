@@ -27,10 +27,6 @@ router.use(function(req, res, next) {
   next();
 });
 
-// router.get('/', function(req, res) {
-//   res.redirect(307, '/home');
-// });
-
 router.get('/home', function(req, res) {
   res.render("index.pug");
 });
@@ -52,6 +48,10 @@ router.get('/r/:shortUrl', function(req, res) {
         res.redirect(307, '/home');
       })
   )
+});
+
+router.get('*', function(req, res){
+  res.send('what???', 404);
 });
 
 // apply the routes to our application
