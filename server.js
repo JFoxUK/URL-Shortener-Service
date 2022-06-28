@@ -41,7 +41,7 @@ router.post('/create', function(req, res) {
   let datdabaseRes;
   let databaseFunctionError;
   connectDatabase.then(
-    checkDatabase(req.params.shortUrl)
+    checkDatabase(longUrl)
       .then( datdabaseRes => {
         console.log('RECORD ALREADY EXISTS - ' + datdabaseRes);
       })
