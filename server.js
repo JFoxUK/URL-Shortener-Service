@@ -12,8 +12,8 @@ const connectionString = {
 };
 let pool;
   
-app.use(bodyParser.json());       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
   extended: true
 })); 
 app.set('view engine', 'pug');
@@ -47,23 +47,19 @@ router.post('/create', function(req, res) {
 
 
 router.get('/r/:shortUrl', function(req, res) {
-
-  //CONNECT AND CHECK
   connectDatabase.then(
     checkDatabase(req.params.shortUrl)
-    .then( res => {
-      console.log('checkdatdabase .then');
-      console.log('checkdatdabase res => ' + res);
-      res.redirect(res.toString());
-    })
-    .catch(e => {
-      console.error(e);
-      console.log('checkdatdabase .catch');
-      res.redirect(307, '/home');
-    })
-
-    )
-  });
+      .then( datdabaseRes => {
+        console.log('checkdatdabase res => ' + datdabaseRes); //res = 'https://www.google.com'
+        res.redirect(datdabaseRes); //TypeError: res.redirect is not a function
+      })
+      .catch(e => {
+        //executed due to above error
+        console.error(e);
+        res.redirect(307, '/home');
+      })
+  )
+});
 
 // apply the routes to our application
 app.use('/', router);
