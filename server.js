@@ -10,12 +10,9 @@ const connectionString = {
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false } 
 };
+let pool;
   
-
-
-
-
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
@@ -50,8 +47,7 @@ router.post('/create', function(req, res) {
 
 router.get('/r/:shortUrl', function(req, res) {
 
-  console.log('**ENTERING shortURL Route');
-  console.log('**Calling CheckDatabase');
+  //CONNECT AND CHECK
   checkDatabase(req.params.shortUrl)
   .then( res => {
     res.redirect(res);
@@ -69,39 +65,42 @@ app.use('/', router);
 
 // Database Functions
 // ==============================================
-var checkDatabase = new Promise(function(resolve, reject, shortUrl) {
-  console.log('**ENTERING checkDatabase');
-  let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
-  let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
-  connectkDatabase()
-  .then(res => {
-    console.log('**Querying DB with POOL');
-    pool.query(queryString)
+var connectDatabase = new Promise(function(resolve, reject){
+  try{
+    pool = new Pool(connectionString);
+    resolve(pool);
+  }catch (e){
+    reject(e);
+  }
+});
+
+var checkDatabase = async function(shortUrl) {
+  
+  return new Promise(function(resolve, reject){
+    console.log('**ENTERING checkDatabase');
+    let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
+    let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
+
+    await pool.query(queryString)
     .then(res => {
-      console.log(res.rows[0].long_url);
       resolve(res.rows[0].long_url);
     })
     .catch(e => {
       console.error(e);
-      reject('No record found');
+      reject(Error('No record found')); 
     })
-  })
-  
 
-});
 
-var connectkDatabase = new Promise(function(resolve, reject){
-  const pool = new Pool(connectionString);
-  pool.on('connect', () => console.log('connected to db'));
-  resolve(pool);
-});
+  });
+
+};
 
 
 // START THE SERVER
 // ==============================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+pool.on('connect', () => console.log('connected to db'));
 
 
 
