@@ -27,6 +27,10 @@ router.use(function(req, res, next) {
   next();
 });
 
+router.get('/', function(req, res) {
+  res.render("index.pug");
+});
+
 router.get('/home', function(req, res) {
   res.render("index.pug");
 });
