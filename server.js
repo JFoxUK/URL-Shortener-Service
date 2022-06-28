@@ -5,6 +5,7 @@ var app     = express();
 var router  = express.Router();
 var port    =   process.env.PORT || 8080;
 var bodyParser = require('body-parser');
+var NO_RECORD_FOUND_ERROR_MESSAGE = 'No record found'
 const { Pool, Client } = require('pg');
 const connectionString = {
   connectionString: process.env.DATABASE_URL,
@@ -38,16 +39,23 @@ router.get('/home', function(req, res) {
 router.post('/create', function(req, res) {
   let longUrl = req.body.longUrl;
 
-  let datdabaseRes;
-  let databaseFunctionError;
+ 
   connectDatabase.then(
     checkDatabase(longUrl)
-      .then( datdabaseRes => {
-        console.log('RECORD ALREADY EXISTS - ' + datdabaseRes);
+      .then( databaseRes => {
+        if(databaseRes != NO_RECORD_FOUND_ERROR_MESSAGE){
+          //Create record needed here
+          console.log('*********** Create record needed here');
+          res.redirect(307, '/home');
+        }else{
+          //SURAFCE ERROR MESSAGE needed here
+          console.log('*********** NO_RECORD_FOUND_ERROR_MESSAGE in CREATE ROUTE >> ' + NO_RECORD_FOUND_ERROR_MESSAGE);
+          console.log('*********** SURAFCE ERROR MESSAGE needed here');
+          res.redirect(307, '/home');
+        }
       })
       .catch(e => {
-        databaseFunctionError = e;
-        console.error(databaseFunctionError);
+        console.error(e);
       })
   )
 
@@ -96,11 +104,15 @@ var checkDatabase = function(shortUrl) {
 
     pool.query(queryString)
     .then(res => {
-      resolve(res.rows[0].long_url);
+      if(res.rows?.[0] == null){
+        resolve(res.rows[0].long_url);
+      }else{
+        console.log('*********** NO_RECORD_FOUND_ERROR_MESSAGE >> ' + NO_RECORD_FOUND_ERROR_MESSAGE);
+        reject(Error(NO_RECORD_FOUND_ERROR_MESSAGE)); 
+      }
     })
     .catch(e => {
       console.error(e);
-      reject(Error('No record found')); 
     })
 
 
