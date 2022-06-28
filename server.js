@@ -52,10 +52,12 @@ router.get('/r/:shortUrl', function(req, res) {
   connectDatabase.then(
     checkDatabase(req.params.shortUrl)
     .then( res => {
+      console.log('checkdatdabase .then');
       res.redirect(res);
     })
     .catch(e => {
       console.error(e);
+      console.log('checkdatdabase .catch');
       res.render("index.pug");
     })
 
