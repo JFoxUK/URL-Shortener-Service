@@ -58,7 +58,7 @@ router.get('/r/:shortUrl', function(req, res) {
     .catch(e => {
       console.error(e);
       console.log('checkdatdabase .catch');
-      res.render("index.pug");
+      res.redirect(307, '/home');
     })
 
     )
