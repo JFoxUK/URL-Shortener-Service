@@ -24,24 +24,19 @@ app.use(express.static(__dirname + '/views/includes/public'));
 // ROUTES
 // ==============================================
 router.use(function(req, res, next) {
-  console.log(req.method, req.url);
   next();
 });
 
-router.get('/', function(req, res) {
-  console.log('I am the home page with empty URL');
-  res.render("index.pug");
-});
+// router.get('/', function(req, res) {
+//   res.redirect(307, '/home');
+// });
 
 router.get('/home', function(req, res) {
-  console.log('I am the home page');
   res.render("index.pug");
 });
 
 router.post('/create', function(req, res) {
-  console.log('Call me to create');
   var longUrl = req.body.longUrl;
-  console.log(longUrl);
   res.send('POST request to the homepage')
 });
 
@@ -50,11 +45,9 @@ router.get('/r/:shortUrl', function(req, res) {
   connectDatabase.then(
     checkDatabase(req.params.shortUrl)
       .then( datdabaseRes => {
-        console.log('checkdatdabase res => ' + datdabaseRes); //res = 'https://www.google.com'
-        res.redirect(datdabaseRes); //TypeError: res.redirect is not a function
+        res.redirect(datdabaseRes);
       })
       .catch(e => {
-        //executed due to above error
         console.error(e);
         res.redirect(307, '/home');
       })
@@ -81,14 +74,11 @@ var connectDatabase = new Promise(function(resolve, reject){
 var checkDatabase = function(shortUrl) {
   
   return new Promise(function(resolve, reject){
-    console.log('**ENTERING checkDatabase');
     let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
     let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
     pool.query(queryString)
     .then(res => {
-      console.log('Pool query res -> ' + res);
-      console.log('Pool queryres.rows[0].long_url ->' + res.rows[0].long_url)
       resolve(res.rows[0].long_url);
     })
     .catch(e => {
