@@ -11,7 +11,7 @@ html
         div.login-box
             h2
                 |URL Shortener
-            form(action="")
+            form#shorten-url_form(action='/create', method='POST')
                 div.user-box
                     input(type="text" name="" required="")
                     label
@@ -20,7 +20,7 @@ html
                     input(type="text" name="" required="")
                     label
                         |Short URL Suffix
-                a(href="")
+                a(href="", onclick="document.getElementById('shorten-url_form').submit();")
                     span
                     span
                     span
