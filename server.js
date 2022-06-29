@@ -157,7 +157,7 @@ var checkDatabase = function(shortUrl, isCreate) {
 
 };
 
-var insertDatabase = function(shortUrl, longUrl) {
+var insertDatabase = (shortUrl, longUrl) => {
   console.log('insertDatabase');
   console.log('insertDatabase >> ' + shortUrl + ' - ' + longUrl);
   let dateFormatted = function formatDate() {
@@ -176,8 +176,6 @@ var insertDatabase = function(shortUrl, longUrl) {
     return [year, month, day].join('-');
   }
 
-  console.log('dateFormatted >> ' + dateFormatted);
-
   let idForDB = () => {
     let s4 = () => {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -187,8 +185,6 @@ var insertDatabase = function(shortUrl, longUrl) {
     //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   }
-
-  console.log('idForDB >> ' + idForDB);
   
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
