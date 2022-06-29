@@ -10,7 +10,7 @@ html
         div 
             div
                 p
-                | Welcome to JFoxUK URL Shortening service. Enter a long URL below to retirve a short URL which can be used anywhere.
+                | Welcome to JFoxUK URL Shortening service. Enter a long URL and a short URL to speed to create a small, memorable URL.
                 br 
                 | Features to come:
                 ul
@@ -23,9 +23,9 @@ html
             div
                 form(action='/create', method='POST')
                     p
-                    | Origional URL: 
+                    | Original Long URL: 
                     input(type='text', name='longUrl', value='')
                     p
-                    | Desired Short URL Suffix: 
+                    | Desired Short URL Suffix \(will look like https://jfoxuk-urlshortner.herokuapp.com/r/\<shorURLPrefix\>\): 
                     input(type='text', name='shortUrl', value='')
                     input(type='submit', value='Submit')

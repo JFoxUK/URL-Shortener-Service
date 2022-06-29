@@ -37,35 +37,34 @@ router.get('/home', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
+  //THESE TWO VARIABLES NEED CONVERTING TO STRING AND ESCAPING ' () {}
   let shortUrl = req.body.shortUrl;
   let longUrl = req.body.longUrl;
 
-  console.log('ENTERED CREATE ROUTE');
-  console.log('ENTERED CREATE ROUTE >> : ' + shortUrl + ' - ' + longUrl);
   connectDatabase.then(
     checkDatabase(shortUrl, true)
       .then( databaseCheckRes => {
-        console.log('databaseCheckRes CREATE ROUTE >> : ' + databaseCheckRes);
         if(databaseCheckRes == NO_RECORD_FOUN_MESSAGE){
-          //Create record needed here
-          console.log('*********** Create record needed here');
           connectDatabase.then(
             insertDatabase(shortUrl, longUrl)
-              .then( datdabaseInsertRes => {
+              .then( () => {
                 //SURFACE SUCCESS MESSAGE NEEDED HERE
+                //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
                 res.end('It worked!');
               })
               .catch(e => {
-                console.error(e);
+                //SURFACE ERROR MESSAGE NEEDED HERE
+                //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
                 res.end(e);
               })
           )
         }else{
           //SURAFCE ERROR MESSAGE needed here as record exists
-          console.log('*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'');
+          //'*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'
           res.end('Short URL already exists');
         }
       })
+      //FATAL ERROR PAGE NEEDED OR SURFAE FATAL ERROR
       .catch(e => {
         console.error(e);
       })
@@ -81,13 +80,15 @@ router.get('/r/:shortUrl', function(req, res) {
         res.redirect(datdabaseRes);
       })
       .catch(e => {
-        console.error(e);
+        //SURFACE ERROR MESSAGE NEEDED HERE
+        //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
         res.redirect(307, '/home');
       })
   )
 });
 
 router.get('*', function(req, res){
+  //404 PAGE NEEDED
   res.send('what???', 404);
 });
 
@@ -121,7 +122,6 @@ var checkDatabase = function(shortUrl, isCreate) {
       if(res.rows.length > 0){
         resolve(res.rows[0].long_url);
       }else{
-        console.log('*********** NO_RECORD_FOUN_MESSAGE >> ' + NO_RECORD_FOUN_MESSAGE);
         reject(NO_RECORD_FOUN_MESSAGE); 
       }
     })
@@ -142,7 +142,6 @@ var checkDatabase = function(shortUrl, isCreate) {
           reject(NO_RECORD_FOUN_MESSAGE);
           
         }else{
-          console.log('*********** NO_RECORD_FOUND_MESSAGE >> ' + NO_RECORD_FOUN_MESSAGE);
           resolve(NO_RECORD_FOUN_MESSAGE);
         }
       })
@@ -157,19 +156,14 @@ var checkDatabase = function(shortUrl, isCreate) {
 };
 
 function insertDatabase(shortUrl, longUrl){
-  console.log('insertDatabase');
-  console.log('insertDatabase >> ' + shortUrl + ' - ' + longUrl);
-
   let idForDB = getIdForDB();
   let dateFormatted = getFormatDate();
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
     let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\')`;
-    //let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
     pool.query(queryString)
     .then(res => {
-      console.log(JSON.stringify(res));
       resolve(res);
     })
     .catch(e => {
@@ -209,9 +203,6 @@ function getIdForDB(){
   //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
-  
-
-
 
 
 
