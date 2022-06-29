@@ -122,7 +122,7 @@ var checkDatabase = function(shortUrl) {
         resolve(res.rows[0].long_url);
       }else{
         console.log('*********** NO_RECORD_FOUND_ERROR_MESSAGE >> ' + NO_RECORD_FOUND_ERROR_MESSAGE);
-        reject(Error(NO_RECORD_FOUND_ERROR_MESSAGE)); 
+        reject(NO_RECORD_FOUND_ERROR_MESSAGE); 
       }
     })
     .catch(e => {
