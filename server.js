@@ -4,6 +4,8 @@ GLOBAL TODO LIST:
 - Add validation to Long URL to include http(s)://www.
 - Escape quotes etc on inputs from malicious code
 - Break server.js up into seperate files
+- Better style who page
+- Add 404
 - Look to change promise.then into async await simialr to:
 
 router.post('/create', async function(req, res) {
