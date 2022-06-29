@@ -9,16 +9,16 @@ html
         
     body
         header
-            ul.nav
-                li.navlink 
+            ul
+                li
                     //- unauth
                     a(href="#")
                         |Home
-                li.navlink
+                li
                     //- unauth
                     a(href="#")
                         |About
-                li.navlink 
+                li
                     a(href="#")
                         |Login
                 //- auth only
@@ -26,21 +26,21 @@ html
                 //-     a(href="#")
                 //-         |My URLs
         
-        div.container
-            div.toast
+        div
+            div
                 if messageShow == true
-                    p.toast_message #{message}
-            div.logo_container
+                    p #{message}
+            div
                 img(src="images/JFoxUK_logo.png")
             
-                div.form_container
+                div
                     form(action='/create', method='POST')
-                        p.longURL-text
+                        p
                         | Enter your long URL
                         br 
-                        input.longURL-input(type='text', name='longUrl', value='', placeholder="https://www.twitter.com/JFoxUK")
-                        p.shortURL-text
+                        input(type='text', name='longUrl', value='', placeholder="https://www.twitter.com/JFoxUK")
+                        p
                         | Enter your desired short URL suffix (it will look like https://jfoxuk-urlshortner.herokuapp.com/r/<shorURLPrefix>): 
-                        input.shortURL-input(type='text', name='shortUrl', value='', placeholder="JFoxUKTwitter")
-                        button.form_submit-button(type='submit', value='Submit')
+                        input(type='text', name='shortUrl', value='', placeholder="JFoxUKTwitter")
+                        button(type='submit', value='Submit')
                             |Create!
