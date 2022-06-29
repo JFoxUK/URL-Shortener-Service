@@ -165,7 +165,7 @@ function insertDatabase(shortUrl, longUrl){
   let dateFormatted = getFormatDate();
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
-    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created) VALUES (${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted})`;
+    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\')`;
     //let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
     pool.query(queryString)
