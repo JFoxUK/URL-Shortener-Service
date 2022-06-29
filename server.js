@@ -52,14 +52,14 @@ router.post('/create', function(req, res) {
                 res.locals.messageShow = true;
                 res.locals.message = 'Short URL created - ' + req.get('host') + '/r/' + shortUrl;
                 //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
-                res.end('It worked!');
+                res.end("index.pug");
               })
               .catch(e => {
                 //SURFACE ERROR MESSAGE NEEDED HERE
                 res.locals.messageShow = true;
                 res.locals.message = e;
                 //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
-                res.end(e);
+                res.end("index.pug");
               })
           )
         }else{
@@ -67,7 +67,7 @@ router.post('/create', function(req, res) {
           //'*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'
           res.locals.messageShow = true;
           res.locals.message = 'Short URL already exists';
-          res.end('Short URL already exists');
+          res.end("index.pug");
         }
       })
       //FATAL ERROR PAGE NEEDED OR SURFAE FATAL ERROR
@@ -75,7 +75,7 @@ router.post('/create', function(req, res) {
         console.error(e);
         res.locals.messageShow = true;
         res.locals.message = e;
-        res.end(e);
+        res.end("index.pug");
       })
   )
 
@@ -93,7 +93,7 @@ router.get('/r/:shortUrl', function(req, res) {
         res.locals.messageShow = true;
         res.locals.message = e;
         //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
-        res.redirect(307, '/home');
+        res.end("index.pug");
       })
   )
 });
