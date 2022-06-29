@@ -5,7 +5,7 @@ var app     = express();
 var router  = express.Router();
 var port    =   process.env.PORT || 8080;
 var bodyParser = require('body-parser');
-var NO_RECORD_FOUND_ERROR_MESSAGE = 'No record found'
+var NO_RECORD_FOUN_MESSAGE = 'No record found'
 const { Pool, Client } = require('pg');
 const connectionString = {
   connectionString: process.env.DATABASE_URL,
@@ -43,10 +43,10 @@ router.post('/create', function(req, res) {
   console.log('ENTERED CREATE ROUTE');
   console.log('ENTERED CREATE ROUTE >> : ' + shortUrl + ' - ' + longUrl);
   connectDatabase.then(
-    checkDatabase(shortUrl)
+    checkDatabase(shortUrl, true)
       .then( databaseCheckRes => {
         console.log('databaseCheckRes CREATE ROUTE >> : ' + databaseCheckRes);
-        if(databaseCheckRes == NO_RECORD_FOUND_ERROR_MESSAGE){
+        if(databaseCheckRes == NO_RECORD_FOUN_MESSAGE){
           //Create record needed here
           console.log('*********** Create record needed here');
           connectDatabase.then(
@@ -77,7 +77,7 @@ router.post('/create', function(req, res) {
 
 router.get('/r/:shortUrl', function(req, res) {
   connectDatabase.then(
-    checkDatabase(req.params.shortUrl)
+    checkDatabase(req.params.shortUrl, false)
       .then( datdabaseRes => {
         res.redirect(datdabaseRes);
       })
@@ -109,7 +109,9 @@ var connectDatabase = new Promise(function(resolve, reject){
   }
 });
 
-var checkDatabase = function(shortUrl) {
+var checkDatabase = function(shortUrl, isCreate) {
+
+  if(!isCreate){
   
   return new Promise(function(resolve, reject){
     let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
@@ -120,8 +122,8 @@ var checkDatabase = function(shortUrl) {
       if(res.rows.length > 0){
         resolve(res.rows[0].long_url);
       }else{
-        console.log('*********** NO_RECORD_FOUND_ERROR_MESSAGE >> ' + NO_RECORD_FOUND_ERROR_MESSAGE);
-        reject(NO_RECORD_FOUND_ERROR_MESSAGE); 
+        console.log('*********** NO_RECORD_FOUN_MESSAGE >> ' + NO_RECORD_FOUN_MESSAGE);
+        reject(NO_RECORD_FOUN_MESSAGE); 
       }
     })
     .catch(e => {
@@ -130,6 +132,28 @@ var checkDatabase = function(shortUrl) {
 
 
   });
+}else if(isCreate){
+  return new Promise(function(resolve, reject){
+    let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
+    let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
+
+    pool.query(queryString)
+    .then(res => {
+      if(res.rows.length > 0){
+        reject(NO_RECORD_FOUN_MESSAGE);
+        
+      }else{
+        console.log('*********** NO_RECORD_FOUND_MESSAGE >> ' + NO_RECORD_FOUN_MESSAGE);
+        resolve(NO_RECORD_FOUN_MESSAGE);
+      }
+    })
+    .catch(e => {
+      console.error(e);
+    })
+
+
+  });
+}
 
 };
 
