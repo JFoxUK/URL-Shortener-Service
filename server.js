@@ -116,8 +116,6 @@ var checkDatabase = function(shortUrl) {
 
     pool.query(queryString)
     .then(res => {
-      console.log('res.rows?.[0] >> ' + res.rows?.[0]);
-      console.log('res.rows.length >> ' + res.rows?.[0]);
       if(res.rows.length > 0){
         resolve(res.rows[0].long_url);
       }else{
