@@ -49,33 +49,37 @@ router.post('/create', function(req, res) {
             insertDatabase(shortUrl, longUrl)
               .then( () => {
                 //SURFACE SUCCESS MESSAGE NEEDED HERE
+                res.end();
+                res.redirect("/home");
                 res.locals.messageShow = true;
                 res.locals.message = 'Short URL created - ' + req.get('host') + '/r/' + shortUrl;
                 //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
-                res.end("index.pug");
               })
               .catch(e => {
                 //SURFACE ERROR MESSAGE NEEDED HERE
+                res.end();
+                res.redirect("/home");
                 res.locals.messageShow = true;
                 res.locals.message = e;
                 //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
-                res.end("index.pug");
               })
           )
         }else{
           //SURAFCE ERROR MESSAGE needed here as record exists
           //'*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'
+          res.end();
+          res.redirect("/home");
           res.locals.messageShow = true;
           res.locals.message = 'Short URL already exists';
-          res.end("index.pug");
         }
       })
       //FATAL ERROR PAGE NEEDED OR SURFAE FATAL ERROR
       .catch(e => {
         console.error(e);
+        res.end();
+        res.redirect("/home");
         res.locals.messageShow = true;
         res.locals.message = e;
-        res.end("index.pug");
       })
   )
 
@@ -90,10 +94,10 @@ router.get('/r/:shortUrl', function(req, res) {
       })
       .catch(e => {
         //SURFACE ERROR MESSAGE NEEDED HERE
+        res.end();
+        res.redirect("/home");
         res.locals.messageShow = true;
         res.locals.message = e;
-        //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
-        res.end("index.pug");
       })
   )
 });
