@@ -3,11 +3,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
@@ -16,7 +11,7 @@ body {
   font-weight: 100;
   font-size: 12px;
   line-height: 30px;
-  color: #777;
+  color: rgb(0, 0, 0);
   background: #d4d4d4;
 }
 
