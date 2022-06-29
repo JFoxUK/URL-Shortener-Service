@@ -13,11 +13,11 @@ html
                 |URL Shortener
             form#shorten-url_form(action='/create', method='POST')
                 div.user-box
-                    input(type="text" name="" required="")
+                    input(type="text" name='longUrl' required="")
                     label
                         |Long URL
                 div.user-box
-                    input(type="text" name="" required="")
+                    input(type="text" name='shortUrl' required="")
                     label
                         |Short URL Suffix
                 a(href="", onclick="document.getElementById('shorten-url_form').submit();")
@@ -26,7 +26,6 @@ html
                     span
                     span
                     |Create
-                button(type='submit', value='Submit')
 		
 
 
