@@ -132,28 +132,28 @@ var checkDatabase = function(shortUrl, isCreate) {
 
 
   });
-}else if(isCreate){
-  return new Promise(function(resolve, reject){
-    let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
-    let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
+  }else if(isCreate){
+    return new Promise(function(resolve, reject){
+      let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
+      let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
-    pool.query(queryString)
-    .then(res => {
-      if(res.rows.length > 0){
-        reject(NO_RECORD_FOUN_MESSAGE);
-        
-      }else{
-        console.log('*********** NO_RECORD_FOUND_MESSAGE >> ' + NO_RECORD_FOUN_MESSAGE);
-        resolve(NO_RECORD_FOUN_MESSAGE);
-      }
-    })
-    .catch(e => {
-      console.error(e);
-    })
+      pool.query(queryString)
+      .then(res => {
+        if(res.rows.length > 0){
+          reject(NO_RECORD_FOUN_MESSAGE);
+          
+        }else{
+          console.log('*********** NO_RECORD_FOUND_MESSAGE >> ' + NO_RECORD_FOUN_MESSAGE);
+          resolve(NO_RECORD_FOUN_MESSAGE);
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      })
 
 
-  });
-}
+    });
+  }
 
 };
 
@@ -211,10 +211,10 @@ var insertDatabase = function(shortUrl, longUrl) {
 };
 
 
+
+
+
 // START THE SERVER
 // ==============================================
 app.listen(port);
 pool.on('connect', () => console.log('connected to db'));
-
-
-
