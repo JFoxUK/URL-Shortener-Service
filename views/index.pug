@@ -8,24 +8,34 @@ html
         link(rel='stylesheet', href='/css/global.css')
         
     body
-        div.page
+        div.login-box
+            h2 URL Shortener
+            form(action='/create', method='POST')
+                div.user-box
+                    input(type="text" required="" name='longUrl', value='', placeholder="https://www.twitter.com/JFoxUK")
+                    label 
+                        |URL to be shortened
+                div.user-box
+                    input(type='text', name='shortUrl', value='', placeholder="JFoxUKTwitter")
+                    label 
+                    |Short URL suffix
+                button(type='submit', value='Submit')
+                    a(href="")
+                        span
+                        span
+                        span
+                        span
+                        |submit
+		
 
-            div
-                img(src="images/JFoxUK_logo.png")
 
-            div.box-bubble
-                div
-                    if messageShow == true
-                        p #{message}
-                        
-                div
-                    form(action='/create', method='POST')
-                        p
-                        | Enter your long URL
-                        br 
-                        input(type='text', name='longUrl', value='', placeholder="https://www.twitter.com/JFoxUK")
-                        p
-                        | Enter your desired short URL suffix (it will look like https://jfoxuk-urlshortner.herokuapp.com/r/<shorURLPrefix>): 
-                        input(type='text', name='shortUrl', value='', placeholder="JFoxUKTwitter")
-                        button(type='submit', value='Submit')
-                            |Create!
+//- img(src="images/JFoxUK_logo.png")
+//- if messageShow == true
+//-                         p #{message}
+//- form(action='/create', method='POST')
+                       
+//- input(type='text', name='longUrl', value='', placeholder="https://www.twitter.com/JFoxUK")
+
+//- input(type='text', name='shortUrl', value='', placeholder="JFoxUKTwitter")
+//- button(type='submit', value='Submit')
+//-     |Create!
