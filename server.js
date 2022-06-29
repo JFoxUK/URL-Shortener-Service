@@ -53,18 +53,18 @@ router.post('/create', function(req, res) {
             insertDatabase(shortUrl, longUrl)
               .then( datdabaseInsertRes => {
                 //SURFACE SUCCESS MESSAGE NEEDED HERE
-                res.status(200).json({success: true});
+                alert('Record insert success');
+                //res.status(200).json({success: true});
               })
               .catch(e => {
                 console.error(e);
-                res.status(200).json({success: false});
+                //res.status(200).json({success: false});
               })
           )
-          res.redirect(307, '/home');
         }else{
           //SURAFCE ERROR MESSAGE needed here as record exists
           console.log('*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'');
-          res.redirect(307, '/home');
+          //res.redirect(307, '/home');
         }
       })
       .catch(e => {
