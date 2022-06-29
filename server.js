@@ -161,8 +161,8 @@ function insertDatabase(shortUrl, longUrl){
   console.log('insertDatabase');
   console.log('insertDatabase >> ' + shortUrl + ' - ' + longUrl);
 
-  let idForDB = getIdForDB
-  let dateFormatted = getDateFormatted();
+  let idForDB = getIdForDB();
+  let dateFormatted = getFormatDate();
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
     let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created) VALUES (${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted})`;
