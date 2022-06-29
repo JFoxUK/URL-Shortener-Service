@@ -52,11 +52,8 @@ header {
 }
 
 .logo{
-    display:block;
-    margin:auto;
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
+    height: auto;
+    width: 50%;
 }
 
 form input[type="text"],
