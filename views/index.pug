@@ -23,6 +23,8 @@ html
             div
                 form(action='/create', method='POST')
                     p
-                    | Your URL: 
+                    | Origional URL: 
                     input(type='text', name='longUrl', value='')
+                    | Desired Short URL Suffix: 
+                    input(type='text', name='shortUrl', value='')
                     input(type='submit', value='Submit')
