@@ -53,11 +53,11 @@ router.post('/create', function(req, res) {
             insertDatabase(shortUrl, longUrl)
               .then( datdabaseInsertRes => {
                 //SURFACE SUCCESS MESSAGE NEEDED HERE
-                res.redirect(307, '/home')
+                res.status(200).json({success: true});
               })
               .catch(e => {
                 console.error(e);
-                res.redirect(307, '/home');
+                res.status(200).json({success: false});
               })
           )
           res.redirect(307, '/home');
