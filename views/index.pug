@@ -11,46 +11,49 @@ html
         header
             ul.nav
                 li.navlink 
+                    //- unauth
                     a(href="#")
                         |Home
-                li.navlink 
+                li.navlink
+                    //- unauth
                     a(href="#")
                         |About
                 li.navlink 
                     a(href="#")
                         |Login
-                li.navlink 
-                    a(href="#")
-                        |My URLs
+                //- auth only
+                //- li.navlink
+                //-     a(href="#")
+                //-         |My URLs
         
         div.container
             div.toast
                 if messageShow == true
-                    p.toast-message #{message}
-            div
+                    p.toast_message #{message}
+            div.logo
                 img(src="images/JFoxUK_logo.png")
-            div
+            div.page-title_container
                 h1 JFoxUK URL Shortening Service
-            div 
+            div.page-body_container 
                 div
                     p
                     | Welcome to JFoxUK URL Shortening service! 
                     | What can you do here? Enter a long URL such as your social media profile, choose a short URL prefix and as a result get an easy to remember URL which redirects to your profile.
-                    p 
+                    p.page-body_announcements
                     | Features to come:
-                    ul
-                        li
-                            | Account/Login
-                        li
-                            | Analytics on short URL clicks 
+                        ul
+                            li
+                                | Account/Login
+                            li
+                                | Analytics on short URL clicks 
                 div
-                    form(action='/create', method='POST')
-                        p
+                    form.url-shortner-service_form(action='/create', method='POST')
+                        p.url-shortner-service-form_longURL-text
                         | Enter your long URL
                         br 
-                        input(type='text', name='longUrl', value='', placeholder="https://www.twitter.com/JFoxUK")
-                        p
+                        input.url-shortner-service-form_longURL-input(type='text', name='longUrl', value='', placeholder="https://www.twitter.com/JFoxUK")
+                        p.url-shortner-service-form_shortURL-text
                         | Enter your desired short URL suffix (it will look like https://jfoxuk-urlshortner.herokuapp.com/r/<shorURLPrefix>): 
-                        input(type='text', name='shortUrl', value='', placeholder="JFoxUKTwitter")
-                        button(type='submit', value='Submit')
+                        input.url-shortner-service-form_shortURL-input(type='text', name='shortUrl', value='', placeholder="JFoxUKTwitter")
+                        button.url-shortner-service-form_submit-button(type='submit', value='Submit')
                             |Create!
