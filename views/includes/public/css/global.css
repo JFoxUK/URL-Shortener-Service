@@ -44,10 +44,12 @@ header {
 
 
 .container {
-  max-width: 400px;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 form input[type="text"],
