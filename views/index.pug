@@ -20,12 +20,17 @@ html
                     input(type="text" name='shortUrl' required="")
                     label
                         |Short URL Suffix
-                a(href="", onclick="document.getElementById('shorten-url_form').submit();")
+                a(href="", onclick=`submitForm('shorten-url_form')`)
                     span
                     span
                     span
                     span
                     |Create
+script.
+  function submitForm(elementId) {
+    let element = document.getElementById(elementId);
+    element.submit();
+  }
 		
 
 
