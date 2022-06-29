@@ -62,7 +62,7 @@ form button[type="submit"] {
 form {
   background: #F9F9F9;
   padding: 25px;
-  margin: 50px 0;
+  margin: 100px 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -82,8 +82,6 @@ form input[type="text"]:hover,
 form input[type="email"]:hover,
 form input[type="tel"]:hover,
 form input[type="url"]:hover {
-  -webkit-transition: border-color 0.3s ease-in-out;
-  -moz-transition: border-color 0.3s ease-in-out;
   transition: border-color 0.3s ease-in-out;
   border: 1px solid #aaa;
 }
