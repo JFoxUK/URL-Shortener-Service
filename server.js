@@ -157,35 +157,12 @@ var checkDatabase = function(shortUrl, isCreate) {
 
 };
 
-var insertDatabase = (shortUrl, longUrl) => {
+function insertDatabase(shortUrl, longUrl){
   console.log('insertDatabase');
   console.log('insertDatabase >> ' + shortUrl + ' - ' + longUrl);
-  let dateFormatted = function formatDate() {
-    var d = new Date(),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
 
-    if (month.length < 2){ 
-      month = '0' + month;
-    }
-    if (day.length < 2){ 
-      day = '0' + day;
-    }
-
-    return [year, month, day].join('-');
-  }
-
-  let idForDB = () => {
-    let s4 = () => {
-      return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-    }
-    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-  }
-  
+  let idForDB = getIdForDB
+  let dateFormatted = getDateFormatted();
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
     let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created) VALUES (${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted})`;
@@ -205,6 +182,35 @@ var insertDatabase = (shortUrl, longUrl) => {
   });
 
 };
+
+
+
+function getFormatDate() {
+    var d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2){ 
+      month = '0' + month;
+    }
+    if (day.length < 2){ 
+      day = '0' + day;
+    }
+
+    return [year, month, day].join('-');
+  }
+
+function getIdForDB(){
+  let s4 = () => {
+    return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+  }
+  //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+  
 
 
 
