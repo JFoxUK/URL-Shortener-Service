@@ -5,7 +5,7 @@ var app     = express();
 var router  = express.Router();
 var port    =   process.env.PORT || 8080;
 var bodyParser = require('body-parser');
-var NO_RECORD_FOUN_MESSAGE = 'No record found'
+var NO_RECORD_FOUND_MESSAGE = 'No record found'
 const { Pool, Client } = require('pg');
 const connectionString = {
   connectionString: process.env.DATABASE_URL,
@@ -44,42 +44,38 @@ router.post('/create', function(req, res) {
   connectDatabase.then(
     checkDatabase(shortUrl, true)
       .then( databaseCheckRes => {
-        if(databaseCheckRes == NO_RECORD_FOUN_MESSAGE){
+        if(databaseCheckRes == NO_RECORD_FOUND_MESSAGE){
           connectDatabase.then(
             insertDatabase(shortUrl, longUrl)
               .then( () => {
                 //SURFACE SUCCESS MESSAGE NEEDED HERE
-                res.end();
-                res.redirect("/home");
                 res.locals.messageShow = true;
                 res.locals.message = 'Short URL created - ' + req.get('host') + '/r/' + shortUrl;
+                res.render("index.pug");
                 //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
               })
               .catch(e => {
                 //SURFACE ERROR MESSAGE NEEDED HERE
-                res.end();
-                res.redirect("/home");
                 res.locals.messageShow = true;
                 res.locals.message = e;
+                res.render("index.pug");
                 //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
               })
           )
         }else{
           //SURAFCE ERROR MESSAGE needed here as record exists
           //'*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'
-          res.end();
-          res.redirect("/home");
           res.locals.messageShow = true;
           res.locals.message = 'Short URL already exists';
+          res.render("index.pug");
         }
       })
       //FATAL ERROR PAGE NEEDED OR SURFAE FATAL ERROR
       .catch(e => {
         console.error(e);
-        res.end();
-        res.redirect("/home");
         res.locals.messageShow = true;
         res.locals.message = e;
+        res.render("index.pug");
       })
   )
 
@@ -94,10 +90,9 @@ router.get('/r/:shortUrl', function(req, res) {
       })
       .catch(e => {
         //SURFACE ERROR MESSAGE NEEDED HERE
-        res.end();
-        res.redirect("/home");
         res.locals.messageShow = true;
         res.locals.message = e;
+        res.render("index.pug");
       })
   )
 });
@@ -137,7 +132,7 @@ var checkDatabase = function(shortUrl, isCreate) {
       if(res.rows.length > 0){
         resolve(res.rows[0].long_url);
       }else{
-        reject(NO_RECORD_FOUN_MESSAGE); 
+        reject(NO_RECORD_FOUND_MESSAGE); 
       }
     })
     .catch(e => {
@@ -157,7 +152,7 @@ var checkDatabase = function(shortUrl, isCreate) {
           reject('RECORD FOUND - NOT ALLOWED DUPLICATES');
           
         }else{
-          resolve(NO_RECORD_FOUN_MESSAGE);
+          resolve(NO_RECORD_FOUND_MESSAGE);
         }
       })
       .catch(e => {
