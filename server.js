@@ -1,3 +1,33 @@
+/*
+GLOBAL TODO LIST:
+
+- Add validation to Long URL to include http(s)://www.
+- Escape quotes etc on inputs from malicious code
+- Break server.js up into seperate files
+- Look to change promise.then into async await simialr to:
+
+router.post('/create', async function(req, res) {
+  const { shortUrl, longUrl } = req.body
+  try {
+    await connectDatabase
+    const databaseCheckRes = await checkDatabase(shortUrl, true)
+    if(databaseCheckRes !== NO_RECORD_FOUND_MESSAGE) throw new Error('Short URL already exists')
+    await insertDatabase(shortUrl, longUrl)
+    res.locals.message = 'MY MESSAGE HERE'   
+  } catch (error) {
+    res.locals.message = error
+  }
+
+  res.locals.messageShow = true
+  res.render(whatever )
+});
+
+
+
+*/
+
+
+
 // BASE SETUP
 // ==============================================
 var express = require('express');
