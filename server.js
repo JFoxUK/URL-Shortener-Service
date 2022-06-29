@@ -154,7 +154,7 @@ var checkDatabase = function(shortUrl, isCreate) {
       pool.query(queryString)
       .then(res => {
         if(res.rows.length > 0){
-          reject(NO_RECORD_FOUN_MESSAGE);
+          reject('RECORD FOUND - NOT ALLOWED DUPLICATES');
           
         }else{
           resolve(NO_RECORD_FOUN_MESSAGE);
@@ -175,7 +175,7 @@ function insertDatabase(shortUrl, longUrl){
   let dateFormatted = getFormatDate();
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
-    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\')`;
+    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, user_id) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', 'jf162@icloud.com')`;
 
     pool.query(queryString)
     .then(res => {
