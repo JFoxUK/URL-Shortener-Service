@@ -8,31 +8,16 @@ html
         link(rel='stylesheet', href='/css/global.css')
         
     body
-        header
-            ul
-                li
-                    //- unauth
-                    a(href="#")
-                        |Home
-                li
-                    //- unauth
-                    a(href="#")
-                        |About
-                li
-                    a(href="#")
-                        |Login
-                //- auth only
-                //- li.navlink
-                //-     a(href="#")
-                //-         |My URLs
-        
-        div
-            div
-                if messageShow == true
-                    p #{message}
+        div.page
+
             div
                 img(src="images/JFoxUK_logo.png")
-            
+
+            div.box-bubble
+                div
+                    if messageShow == true
+                        p #{message}
+                        
                 div
                     form(action='/create', method='POST')
                         p
