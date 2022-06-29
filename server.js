@@ -40,10 +40,12 @@ router.post('/create', function(req, res) {
   let shortUrl = req.body.shortUrl;
   let longUrl = req.body.longUrl;
 
- 
+  console.log('ENTERED CREATE ROUTE');
+  console.log('ENTERED CREATE ROUTE >> : ' + shortUrl + ' - ' + longUrl);
   connectDatabase.then(
     checkDatabase(shortUrl)
       .then( databaseCheckRes => {
+        console.log('databaseCheckRes CREATE ROUTE >> : ' + databaseCheckRes);
         if(databaseCheckRes == NO_RECORD_FOUND_ERROR_MESSAGE){
           //Create record needed here
           console.log('*********** Create record needed here');
@@ -61,7 +63,6 @@ router.post('/create', function(req, res) {
           res.redirect(307, '/home');
         }else{
           //SURAFCE ERROR MESSAGE needed here as record exists
-          console.log('*********** NO_RECORD_FOUND_ERROR_MESSAGE in CREATE ROUTE >> ' + NO_RECORD_FOUND_ERROR_MESSAGE);
           console.log('*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'');
           res.redirect(307, '/home');
         }
@@ -133,7 +134,8 @@ var checkDatabase = function(shortUrl) {
 };
 
 var insertDatabase = function(shortUrl, longUrl) {
-
+  console.log('insertDatabase');
+  console.log('insertDatabase >> ' + shortUrl + ' - ' + longUrl);
   let dateFormatted = function formatDate() {
     var d = new Date(),
     month = '' + (d.getMonth() + 1),
@@ -150,6 +152,8 @@ var insertDatabase = function(shortUrl, longUrl) {
     return [year, month, day].join('-');
   }
 
+  console.log('dateFormatted >> ' + dateFormatted);
+
   let idForDB = () => {
     let s4 = () => {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -159,6 +163,8 @@ var insertDatabase = function(shortUrl, longUrl) {
     //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   }
+
+  console.log('idForDB >> ' + idForDB);
   
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
