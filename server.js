@@ -37,20 +37,32 @@ router.get('/home', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
+  let shortUrl = req.body.shortUrl;
   let longUrl = req.body.longUrl;
 
  
   connectDatabase.then(
-    checkDatabase(longUrl)
-      .then( databaseRes => {
-        if(databaseRes != NO_RECORD_FOUND_ERROR_MESSAGE){
+    checkDatabase(shortUrl)
+      .then( databaseCheckRes => {
+        if(databaseCheckRes == NO_RECORD_FOUND_ERROR_MESSAGE){
           //Create record needed here
           console.log('*********** Create record needed here');
+          connectDatabase.then(
+            insertDatabase(shortUrl, longUrl)
+              .then( datdabaseInsertRes => {
+                //SURFACE SUCCESS MESSAGE NEEDED HERE
+                res.redirect(307, '/home')
+              })
+              .catch(e => {
+                console.error(e);
+                res.redirect(307, '/home');
+              })
+          )
           res.redirect(307, '/home');
         }else{
-          //SURAFCE ERROR MESSAGE needed here
+          //SURAFCE ERROR MESSAGE needed here as record exists
           console.log('*********** NO_RECORD_FOUND_ERROR_MESSAGE in CREATE ROUTE >> ' + NO_RECORD_FOUND_ERROR_MESSAGE);
-          console.log('*********** SURAFCE ERROR MESSAGE needed here');
+          console.log('*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'');
           res.redirect(307, '/home');
         }
       })
@@ -115,6 +127,54 @@ var checkDatabase = function(shortUrl) {
     })
     .catch(e => {
       console.error(e);
+    })
+
+
+  });
+
+};
+
+var insertDatabase = function(shortUrl, longUrl) {
+
+  let dateFormatted = function formatDate() {
+    var d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2){ 
+      month = '0' + month;
+    }
+    if (day.length < 2){ 
+      day = '0' + day;
+    }
+
+    return [year, month, day].join('-');
+  }
+
+  let idForDB = () => {
+    let s4 = () => {
+      return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  }
+  
+  return new Promise(function(resolve, reject){
+    console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
+    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created) VALUES (${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted})`;
+    //let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
+
+    pool.query(queryString)
+    .then(res => {
+      console.log(JSON.stringify(res));
+      resolve(res);
+    })
+    .catch(e => {
+      console.error(e);
+      reject(Error(e));
     })
 
 
