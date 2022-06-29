@@ -9,7 +9,7 @@ html
         
     body
         if messageShow == true
-            p #{message}!
+            p.global_message #{message}!
         div
             img(src="images/JFoxUK_logo.png")
         div
@@ -25,8 +25,6 @@ html
                         | Account/Login
                     li
                         | Analytics on short URL clicks 
-                    li
-                        | Customise short URL
             div
                 form(action='/create', method='POST')
                     p
