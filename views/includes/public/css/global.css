@@ -51,6 +51,11 @@ header {
   
 }
 
+.logo{
+    display:block;
+    margin:auto;
+}
+
 form input[type="text"],
 form input[type="email"],
 form input[type="tel"],
