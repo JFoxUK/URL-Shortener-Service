@@ -6,6 +6,7 @@ GLOBAL TODO LIST:
 - Break server.js up into seperate files
 - Better style who page
 - Add 404
+- Make Long URL required but if short URL is missing, generate random 6 char string
 - Look to change promise.then into async await simialr to:
 
 router.post('/create', async function(req, res) {
