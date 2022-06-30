@@ -29,6 +29,13 @@ body {
 	text-align: center;
 }
 
+.form-box .toast-message{
+	color: #03E9F4;
+	font-size: 16px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
 .form-box .url-box {
 	position: relative;
 }
