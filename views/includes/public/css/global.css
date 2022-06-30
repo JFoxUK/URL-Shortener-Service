@@ -9,7 +9,7 @@ body {
 	background: linear-gradient(#141e30, #243b55);	
 }
 
-.login-box {
+.form-box {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -22,18 +22,18 @@ body {
 	border-radius: 10px;
 }
 
-.login-box h2 {
+.form-box h2 {
 	margin: 0 0 30px;
 	padding: 0;
 	color: #F1EEE6;
 	text-align: center;
 }
 
-.login-box .user-box {
+.form-box .url-box {
 	position: relative;
 }
 
-.login-box .user-box input {
+.form-box .url-box input {
 	width: 100%;
 	padding: 10px 0;
 	font-size: 16px;
@@ -45,7 +45,7 @@ body {
 	background: transparent;
 }
 
-.login-box .user-box label {
+.form-box .url-box label {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -56,7 +56,7 @@ body {
 	transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label, .login-box .user-box input:valid ~ label {
+.form-box .url-box input:focus ~ label, .form-box .url-box input:valid ~ label {
 	top: -20px; 
 	left: 0px; 
 	color: #03E9F4;
@@ -64,7 +64,7 @@ body {
 }
 
 
-.login-box form a {
+.form-box form a {
 	position: relative;
 	display: inline-block;
 	padding: 10px 20px;
@@ -78,7 +78,7 @@ body {
 	letter-spacing: 4px;
 }
 
-.login-box form a:hover {
+.form-box form a:hover {
 	background: #03E9F4;
 	color: #F1EEE6;
 	border-radius: 5px;
@@ -88,12 +88,12 @@ body {
 							 0 0 100px #03E9F4;
 }
 
-.login-box a span {
+.form-box a span {
 	position: absolute;
 	display: block;
 }
 
-.login-box a span:nth-child(1) {
+.form-box a span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -111,7 +111,7 @@ body {
   }
 }
 
-.login-box span:nth-child(2) {
+.form-box span:nth-child(2) {
 	top: -100%;
 	right: 0;
 	width: 2px;
@@ -130,7 +130,7 @@ body {
 	}
 }
 
-.login-box span:nth-child(3){
+.form-box span:nth-child(3){
 	bottom: 0;
 	right: -100%;
 	width: 100%;
@@ -149,7 +149,7 @@ body {
 	}
 }
 
-.login-box span:nth-child(4) {
+.form-box span:nth-child(4) {
 	bottom: -100%;
 	left: 0;
 	width: 2px;

@@ -8,15 +8,15 @@ html
         link(rel='stylesheet', href='/css/global.css')
         
     body
-        div.login-box
+        div.form-box
             h2
                 |URL Shortener
             form#shorten-url_form(action='/create', method='POST')
-                div.user-box
+                div.url-box
                     input(type="text" name='longUrl' required="")
                     label
                         |Long URL
-                div.user-box
+                div.url-box
                     input(type="text" name='shortUrl' required="")
                     label
                         |Short URL Suffix
@@ -31,7 +31,7 @@ script.
     let element = document.getElementById(elementId);
     console.log(element);
     element.submit();
-  }
+    }
 		
 
 
