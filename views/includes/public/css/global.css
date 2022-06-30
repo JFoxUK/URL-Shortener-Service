@@ -31,9 +31,7 @@ body {
 
 .form-box .toast-message{
 	color: #03E9F4;
-	font-size: 16px;
-	text-decoration: none;
-	text-transform: uppercase;
+	font-size: 10px;
 }
 
 .form-box .url-box {
