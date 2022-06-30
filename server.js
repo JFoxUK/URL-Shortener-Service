@@ -7,6 +7,13 @@ GLOBAL TODO LIST:
 - Better style who page
 - Add 404
 - Make Long URL required but if short URL is missing, generate random 6 char string
+- Add login leaf at top left
+- Animate full box to flip on click of login or INFO
+- Login presents with User/pass or Social Signup/in
+- Top center (when logged in) - click to flip to see 'my URLS'
+- Handle logins
+
+
 - Look to change promise.then into async await simialr to:
 
 router.post('/create', async function(req, res) {
