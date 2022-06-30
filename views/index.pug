@@ -11,6 +11,13 @@ html
         div.form-box
             h2
                 |URL Shortener
+                div.tooltip-container
+                    a.tooltip(href="#")
+                                span
+                                span
+                                span
+                                span
+                                |INFO
             if messageShow == true
                 p.toast-message #{message}
             form#shorten-url_form(action='/create', method='POST')
@@ -29,10 +36,10 @@ html
                     span
                     |Create
 script.
-  function submitForm(elementId) {
-    let element = document.getElementById(elementId);
-    console.log(element);
-    element.submit();
+    function submitForm(elementId) {
+        let element = document.getElementById(elementId);
+        console.log(element);
+        element.submit();
     }
 		
 
