@@ -37,6 +37,9 @@ body {
 							 0 0 100px #03E9F4;
 }
 
+.form{
+	padding-top: 25%;
+  }
 
 .form-box {
 	position: absolute;
