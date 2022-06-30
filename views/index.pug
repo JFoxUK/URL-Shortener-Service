@@ -11,6 +11,8 @@ html
         div.form-box
             h2
                 |URL Shortener
+            if messageShow == true
+                p.toast-message #{message}
             form#shorten-url_form(action='/create', method='POST')
                 div.url-box
                     input(type="text" name='longUrl' required="")
