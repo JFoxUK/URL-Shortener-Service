@@ -44,6 +44,7 @@ var express = require('express');
 var app     = express();
 var router  = express.Router();
 var port    =   process.env.PORT || 8080;
+const session = require('express-session');
 var bodyParser = require('body-parser');
 var jsdom = require("jsdom");
 const { JSDOM } = jsdom;
@@ -217,7 +218,8 @@ function insertDatabase(shortUrl, longUrl){
   let dateFormatted = getFormatDate();
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
-    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, user_id) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', 'jf162@icloud.com')`;
+    //GUEST USER_ID = 000000
+    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, user_id) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', '000000')`;
 
     pool.query(queryString)
     .then(res => {
