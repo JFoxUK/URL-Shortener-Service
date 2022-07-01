@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(window).on("load", function(){
     $(".login_button").on("click", function() {
        $(".form-box").addClass("hidden")
        $(".login-box").removeClass("hidden")
