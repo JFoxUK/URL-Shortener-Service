@@ -248,6 +248,7 @@ function queryUser(username, password){
     console.log(queryString);
     pool.query(queryString)
     .then(res => {
+      console.log(JSON.stringify(res));
       resolve(res);
     })
     .catch(e => {
