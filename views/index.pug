@@ -4,60 +4,83 @@ html
         title JFoxUK URL Shortening Service
         meta(name='description', content='URL Shortener created by Jonathan Fox (@JFoxUK). Can be likened to the popular bit.ly, sfdc.co, etc')
         meta(charset='utf-8')
-        link(rel='icon', type='image/x-icon', href='images/JFoxUK_logo.png')
+        link(rel='icon', type='image/x-icon', href='/images/JFoxUK_logo.png')
         link(rel='stylesheet', href='/css/global.css')
-        
     body
-        div.form-box
-            h2
-                |URL Shortener
-                div.tooltip-container
-                    a.tooltip(href="#")
-                                span
-                                span
-                                span
-                                span
-                                |INFO
-                div.login_button-container
-                    a.login_button(href="#")
-                                span
-                                span
-                                span
-                                span
-                                |LOGIN
-            if messageShow == true
-                p.toast-message #{message}
-            form#shorten-url_form.form(action='/create', method='POST')
-                div.url-box
-                    input(type="text" name='longUrl' required="")
-                    label
-                        |Long URL
-                div.url-box
-                    input(type="text" name='shortUrl' required="")
-                    label
-                        |Short URL Suffix
-                a.submit-button(href="#", onclick='submitForm("shorten-url_form")')
-                    span
-                    span
-                    span
-                    span
-                    |Create
-script.
-    function submitForm(elementId) {
-        let element = document.getElementById(elementId);
-        console.log(element);
-        element.submit();
-    }
-		
-
-
-//- img(src="images/JFoxUK_logo.png")
-//- if messageShow == true
-//-                         p #{message}
-//- form(action='/create', method='POST')
-                       
-//- input(type='text', name='longUrl', value='', placeholder="https://www.twitter.com/JFoxUK")
-
-//- input(type='text', name='shortUrl', value='', placeholder="JFoxUKTwitter")
-//- button(type='submit', value='Submit')
-//-     |Create!
+        div.full-container
+            div.login-box.hidden
+                h2
+                    |Login
+                    div.tooltip-container
+                        a.tooltip(href="#")
+                                    span
+                                    span
+                                    span
+                                    span
+                                    |INFO
+                    div.back_button-container
+                        a.back_button(href="#")
+                                    span
+                                    span
+                                    span
+                                    span
+                                    |BACK
+                if messageShow == true
+                    p.toast-message #{message}
+                form#login_form.form(action='/login', method='POST')
+                    div.url-box
+                        input(type="text" name='username' required="")
+                        label
+                            |Username
+                    div.url-box
+                        input(type="text" name='password' required="")
+                        label
+                            |Password
+                    a.submit-button(href="#", onclick='submitForm("shorten-url_form")')
+                        span
+                        span
+                        span
+                        span
+                        |Submit
+            div.form-box
+                h2
+                    |URL Shortener
+                    div.tooltip-container
+                        a.tooltip(href="#")
+                                    span
+                                    span
+                                    span
+                                    span
+                                    |INFO
+                    div.login_button-container
+                        a.login_button(href="#")
+                                    span
+                                    span
+                                    span
+                                    span
+                                    |LOGIN
+                if messageShow == true
+                    p.toast-message #{message}
+                form#shorten-url_form.form(action='/create', method='POST')
+                    div.url-box
+                        input(type="text" name='longUrl' required)
+                        label
+                            |Long URL
+                    div.url-box
+                        input(type="text" name='shortUrl' required)
+                        label
+                            |Short URL Suffix
+                    a.submit-button(href="#", onclick='submitForm("shorten-url_form")')
+                        span
+                        span
+                        span
+                        span
+                        |Create
+        script.
+            function submitForm(elementId) {
+                let element = document.getElementById(elementId);
+                console.log(element);
+                element.submit();
+            }
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+        script(src='/js/animation.js')

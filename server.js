@@ -45,6 +45,13 @@ var app     = express();
 var router  = express.Router();
 var port    =   process.env.PORT || 8080;
 var bodyParser = require('body-parser');
+var jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = (new JSDOM('')).window;
+global.document = document;
+var $ = jQuery = require('jquery')(window);
+
 var NO_RECORD_FOUND_MESSAGE = 'No record found'
 const { Pool, Client } = require('pg');
 const connectionString = {
@@ -139,7 +146,7 @@ router.get('/r/:shortUrl', function(req, res) {
 
 router.get('*', function(req, res){
   //404 PAGE NEEDED
-  res.send('what???', 404);
+  res.send('404 - NOT FOUND');
 });
 
 // apply the routes to our application
