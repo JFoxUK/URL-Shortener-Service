@@ -245,12 +245,13 @@ var checkDatabase = function(shortUrl, isCreate) {
 function queryUser(username, password){
   return new Promise(function(resolve, reject){
     let queryString = `SELECT id, username, email FROM public.user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
-
+    console.log(queryString);
     pool.query(queryString)
     .then(res => {
       resolve(res);
     })
     .catch(e => {
+      console.log(e);
       reject(Error(e));
     })
 
