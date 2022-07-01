@@ -165,6 +165,7 @@ app.post('/login', function(request, response) {
           console.log('>>>>>>>>>>>>>> USER FOUND AND CORRECT  <<<<<<<<<<<<<  == ' + JSON.stringify(userQueryRes));
           request.session.loggedin = true;
           request.session.username = username;
+          response.send('Logged In Sucessfully!');
           response.end();
         })
         .catch(e => {
