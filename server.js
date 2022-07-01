@@ -44,7 +44,7 @@ var express = require('express');
 var app     = express();
 var router  = express.Router();
 var port    =   process.env.PORT || 8080;
-var session = require('cookie-session');
+const session = require('express-session');
 var bodyParser = require('body-parser');
 var jsdom = require("jsdom");
 const { JSDOM } = jsdom;
@@ -162,9 +162,10 @@ app.post('/login', function(request, response) {
 		connectDatabase.then(
       queryUser(username, password)
         .then( (userQueryRes) => {
+          console.log('>>>>>>>>>>>>>> USER FOUND AND CORRECT  <<<<<<<<<<<<<  == ' + JSON.stringify(userQueryRes));
           request.session.loggedin = true;
           request.session.username = username;
-          res.send("Success");
+          response.end();
         })
         .catch(e => {
           console.log(e);
@@ -227,7 +228,7 @@ var checkDatabase = function(shortUrl, isCreate) {
       pool.query(queryString)
       .then(res => {
         if(res.rows.length > 0){
-          reject('SHORT URL HAS ALREADY BEEN USED - PLEASE CHOOSE A DIFFERENT SHORT URL SUFFIX');
+          reject('SHORT URL HAS ALREADY BEEN USED - PLEASE CHOOSE A DIFFERENT SHORT URL');
           
         }else{
           resolve(NO_RECORD_FOUND_MESSAGE);
@@ -245,15 +246,13 @@ var checkDatabase = function(shortUrl, isCreate) {
 
 function queryUser(username, password){
   return new Promise(function(resolve, reject){
-    let queryString = `SELECT id, username, email FROM public.user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
-    console.log(queryString);
+    let queryString = `SELECT id, username, email FROM user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
+
     pool.query(queryString)
     .then(res => {
-      console.log(JSON.stringify(res));
       resolve(res);
     })
     .catch(e => {
-      console.log(e);
       reject(Error(e));
     })
 
