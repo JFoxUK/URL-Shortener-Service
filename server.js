@@ -248,7 +248,8 @@ function queryUser(username, password){
   return new Promise(function(resolve, reject){
     console.log('username > ' + username);
     console.log('password > ' + password);
-    let queryString = `SELECT id, username, email, FROM user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
+    let queryString = `SELECT id, username, email, FROM public.user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
+    console.log('queryString > ' + queryString);
 
     pool.query(queryString)
     .then(res => {
