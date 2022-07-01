@@ -64,7 +64,14 @@ let pool;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-})); 
+}));
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'pug');
 app.set('views','./views');
 app.use(express.static(__dirname + '/views/includes/public'));
@@ -145,6 +152,29 @@ router.get('/r/:shortUrl', function(req, res) {
   )
 });
 
+app.post('/login', function(request, response) {
+	// Capture the input fields
+	let username = request.body.username;
+	let password = request.body.password;
+	// Ensure the input fields exists and are not empty
+	if (username && password) {
+		// Execute SQL query that'll select the account from the database based on the specified username and password
+		connectDatabase.then(
+      queryUser(username, password)
+        .then( () => {
+          console.log('>>>>>>>>>>>>>> USER FOUND AND CORRECT  <<<<<<<<<<<<<')
+          request.session.loggedin = true;
+          request.session.username = username;
+          response.end();
+        })
+        .catch(e => {
+          response.send('Incorrect Username and/or Password!');
+          response.end();
+        })
+    )
+	}
+});
+
 router.get('*', function(req, res){
   //404 PAGE NEEDED
   res.send('404 - NOT FOUND');
@@ -210,6 +240,24 @@ var checkDatabase = function(shortUrl, isCreate) {
 
     });
   }
+
+};
+
+function queryUser(username, password){
+  return new Promise(function(resolve, reject){
+    let queryString = `SELECT id, username, email, FROM user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
+
+    pool.query(queryString)
+    .then(res => {
+      resolve(res);
+    })
+    .catch(e => {
+      console.error(e);
+      reject(Error(e));
+    })
+
+
+  });
 
 };
 
