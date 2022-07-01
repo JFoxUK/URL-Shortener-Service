@@ -161,13 +161,14 @@ app.post('/login', function(request, response) {
 		// Execute SQL query that'll select the account from the database based on the specified username and password
 		connectDatabase.then(
       queryUser(username, password)
-        .then( () => {
-          console.log('>>>>>>>>>>>>>> USER FOUND AND CORRECT  <<<<<<<<<<<<<')
+        .then( (userQueryRes) => {
+          console.log('>>>>>>>>>>>>>> USER FOUND AND CORRECT  <<<<<<<<<<<<<  == ' + JSON.stringify(userQueryRes));
           request.session.loggedin = true;
           request.session.username = username;
           response.end();
         })
         .catch(e => {
+          console.log(e);
           response.send('Incorrect Username and/or Password!');
           response.end();
         })
@@ -245,10 +246,13 @@ var checkDatabase = function(shortUrl, isCreate) {
 
 function queryUser(username, password){
   return new Promise(function(resolve, reject){
+    console.log('username > ' + username);
+    console.log('password > ' + password);
     let queryString = `SELECT id, username, email, FROM user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
 
     pool.query(queryString)
     .then(res => {
+      console.log('res > ' + JSON.stringify(res));
       resolve(res);
     })
     .catch(e => {
