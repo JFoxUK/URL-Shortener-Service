@@ -164,9 +164,10 @@ app.post('/login', function(request, response) {
         .then( (userQueryRes) => {
           request.session.loggedin = true;
           request.session.username = username;
-          res.render("index.pug");
+          res.send("Success");
         })
         .catch(e => {
+          console.log(e);
           response.send('Incorrect Username and/or Password!');
           response.end();
         })
