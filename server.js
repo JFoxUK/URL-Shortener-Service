@@ -162,13 +162,11 @@ app.post('/login', function(request, response) {
 		connectDatabase.then(
       queryUser(username, password)
         .then( (userQueryRes) => {
-          console.log('>>>>>>>>>>>>>> USER FOUND AND CORRECT  <<<<<<<<<<<<<  == ' + JSON.stringify(userQueryRes));
           request.session.loggedin = true;
           request.session.username = username;
-          response.end();
+          res.render("index.pug");
         })
         .catch(e => {
-          console.log(e);
           response.send('Incorrect Username and/or Password!');
           response.end();
         })
@@ -228,7 +226,7 @@ var checkDatabase = function(shortUrl, isCreate) {
       pool.query(queryString)
       .then(res => {
         if(res.rows.length > 0){
-          reject('RECORD FOUND - NOT ALLOWED DUPLICATES');
+          reject('SHORT URL HAS ALREADY BEEN USED - PLEASE CHOOSE A DIFFERENT SHORT URL SUFFIX');
           
         }else{
           resolve(NO_RECORD_FOUND_MESSAGE);
@@ -246,18 +244,13 @@ var checkDatabase = function(shortUrl, isCreate) {
 
 function queryUser(username, password){
   return new Promise(function(resolve, reject){
-    console.log('username > ' + username);
-    console.log('password > ' + password);
     let queryString = `SELECT id, username, email FROM user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
-    console.log('queryString > ' + queryString);
 
     pool.query(queryString)
     .then(res => {
-      console.log('res > ' + JSON.stringify(res));
       resolve(res);
     })
     .catch(e => {
-      console.error(e);
       reject(Error(e));
     })
 
