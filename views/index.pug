@@ -18,6 +18,13 @@ html
                                 span
                                 span
                                 |INFO
+                div.login_button-container
+                    a.login_button(href="#")
+                                span
+                                span
+                                span
+                                span
+                                |LOGIN
             if messageShow == true
                 p.toast-message #{message}
             form#shorten-url_form.form(action='/create', method='POST')
@@ -29,7 +36,7 @@ html
                     input(type="text" name='shortUrl' required="")
                     label
                         |Short URL Suffix
-                a(href="#", onclick='submitForm("shorten-url_form")')
+                a.submit-button(href="#", onclick='submitForm("shorten-url_form")')
                     span
                     span
                     span
