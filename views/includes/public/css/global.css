@@ -9,19 +9,7 @@ body {
 	background: linear-gradient(#141e30, #243b55);	
 }
 
-.hidden{
-	display: none;
-}
-
-
-.tooltip-container{
-	position:absolute;
-	top:0;
-	right:0;
-	margin: 2%;
-}
-
-.tooltip, .login_button, .back_button{
+.tooltip{
 	padding: 10px;
 	color: #03E9F4;
 	font-size: 10px;
@@ -32,14 +20,42 @@ body {
 	margin-top: 40px;
 }
 
-.login_button-container, .back_button-container{
+.tooltip-container{
+	position:absolute;
+	top:0;
+	right:0;
+	margin: 2%;
+}
+
+.tooltip:hover{
+  	background: #03E9F4;
+	color: #F1EEE6;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #03E9F4,
+		0 0 25px #03E9F4,
+		0 0 50px #03E9F4,
+		0 0 100px #03E9F4;
+}
+
+.login_button{
+	padding: 10px;
+	color: #03E9F4;
+	font-size: 10px;
+	text-decoration: none;
+	text-transform: uppercase;
+	overflow: hidden;
+	transition: .5s;
+	margin-top: 40px;
+}
+
+.login_button-container{
 	position:absolute;
 	top:0;
 	left:0;
 	margin: 2%;
 }
 
-.tooltip:hover, .login_button:hover, .back_button:hover{
+.login_button:hover{
   	background: #03E9F4;
 	color: #F1EEE6;
 	border-radius: 5px;
@@ -53,7 +69,7 @@ body {
 	padding-top: 10%;
   }
 
-.form-box, .login-box {
+.form-box {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -67,22 +83,22 @@ body {
 	zoom: 1.5;
 }
 
-.form-box h2, .login-box h2 {
+.form-box h2 {
 	padding-top: 10%;
 	color: #F1EEE6;
 	text-align: center;
 }
 
-.form-box .toast-message, .login-box .toast-message{
+.form-box .toast-message{
 	color: #03E9F4;
 	font-size: 10px;
 }
 
-.form-box .url-box, .login-box .url-box {
+.form-box .url-box {
 	position: relative;
 }
 
-.form-box .url-box input, .login-box .url-box input {
+.form-box .url-box input {
 	width: 100%;
 	padding: 10px 0;
 	font-size: 16px;
@@ -94,7 +110,7 @@ body {
 	background: transparent;
 }
 
-.form-box .url-box label, .login-box .url-box label {
+.form-box .url-box label {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -105,7 +121,7 @@ body {
 	transition: .5s;
 }
 
-.form-box .url-box input:focus ~ label, .form-box .url-box input:valid ~ label, .login-box .url-box input:focus ~ label, .login-box .url-box input:valid ~ label {
+.form-box .url-box input:focus ~ label, .form-box .url-box input:valid ~ label {
 	top: -20px; 
 	left: 0px; 
 	color: #03E9F4;
@@ -113,7 +129,7 @@ body {
 }
 
 
-.form-box form a, .login-box form a {
+.form-box form a {
 	position: relative;
 	display: inline-block;
 	padding: 10px 20px;
@@ -127,7 +143,7 @@ body {
 	letter-spacing: 4px;
 }
 
-.form-box form a:hover, .login-box form a:hover {
+.form-box form a:hover {
 	background: #03E9F4;
 	color: #F1EEE6;
 	border-radius: 5px;
@@ -137,12 +153,12 @@ body {
 							 0 0 100px #03E9F4;
 }
 
-.form-box a span, .login-box a span {
+.form-box a span {
 	position: absolute;
 	display: block;
 }
 
-.form-box a.submit-button span:nth-child(1), .login-box a.submit-button span:nth-child(1) {
+.form-box a.submit-button span:nth-child(1) {
 	top: 0;
 	left: -100%;
 	width: 100%;
@@ -160,7 +176,7 @@ body {
 	}
 }
 
-.form-box a.submit-button span:nth-child(2), .login-box a.submit-button span:nth-child(2) {
+.form-box a.submit-button span:nth-child(2) {
 	top: -100%;
 	right: 0;
 	width: 2px;
@@ -179,7 +195,7 @@ body {
 	}
 }
 
-.form-box a.submit-button span:nth-child(3), .login-box a.submit-button span:nth-child(3){
+.form-box a.submit-button span:nth-child(3){
 	bottom: 0;
 	right: -100%;
 	width: 100%;
@@ -198,7 +214,7 @@ body {
 	}
 }
 
-.form-box a.submit-button span:nth-child(4), .login-box a.submit-button span:nth-child(4) {
+.form-box a.submit-button span:nth-child(4) {
 	bottom: -100%;
 	left: 0;
 	width: 2px;
