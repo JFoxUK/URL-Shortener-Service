@@ -26,7 +26,7 @@ body {
 
 .tooltip-info, .tooltip-back, .login_button, .back_button{
 	padding: 10px;
-	color: #03E9F4;
+	color: #d97442;
 	font-size: 10px;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -43,13 +43,13 @@ body {
 }
 
 .tooltip-info:hover, .tooltip-back:hover, .login_button:hover, .back_button:hover{
-  	background: #03E9F4;
+  	background: #d97442;
 	color: #F1EEE6;
 	border-radius: 5px;
-	box-shadow: 0 0 5px #03E9F4,
-		0 0 25px #03E9F4,
-		0 0 50px #03E9F4,
-		0 0 100px #03E9F4;
+	box-shadow: 0 0 5px #d97442,
+		0 0 25px #d97442,
+		0 0 50px #d97442,
+		0 0 100px #d97442;
 }
 
 .dataTableDiv{
@@ -67,7 +67,7 @@ body {
 }
 .dataTableDiv-header{
 	color: #F1EEE6;
-	border:1px solid #03E9F4;
+	border:1px solid #d97442;
 	font-size: 14px;
 	font-weight: bold;
 	padding: 1%;
@@ -81,14 +81,14 @@ body {
 
 }
 .dataTableDiv-data{
-	border:1px solid #03E9F4;
+	border:1px solid #d97442;
 	font-size: 12px;
 	word-wrap:break-word;
 	text-align: center;
 
 }
 .dataTableDiv-data-url, .dataTableDiv-data-url a:link, .dataTableDiv-data-url a:active, .dataTableDiv-data-url a:visited{
-	color: #03E9F4;
+	color: #d97442;
 	font-size: 12px;
 }
 .dataTableDiv-data-url a:hover{
@@ -131,7 +131,7 @@ body {
 }
 
 .form-box .toast-message, .login-box .toast-message{
-	color: #03E9F4;
+	color: #d97442;
 	font-size: 10px;
 }
 
@@ -165,7 +165,7 @@ body {
 .form-box .url-box input:focus ~ label, .form-box .url-box input:valid ~ label, .login-box .url-box input:focus ~ label, .login-box .url-box input:valid ~ label {
 	top: -20px; 
 	left: 0px; 
-	color: #03E9F4;
+	color: #d97442;
 	font-size: 12px;
 }
 
@@ -174,7 +174,7 @@ body {
 	position: relative;
 	display: inline-block;
 	padding: 10px 20px;
-	color: #03E9F4;
+	color: #d97442;
 	font-size: 16px;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -185,13 +185,13 @@ body {
 }
 
 .form-box form a:hover, .login-box form a:hover {
-	background: #03E9F4;
+	background: #d97442;
 	color: #F1EEE6;
 	border-radius: 5px;
-	box-shadow: 0 0 5px #03E9F4,
-							 0 0 25px #03E9F4,
-							 0 0 50px #03E9F4,
-							 0 0 100px #03E9F4;
+	box-shadow: 0 0 5px #d97442,
+							 0 0 25px #d97442,
+							 0 0 50px #d97442,
+							 0 0 100px #d97442;
 }
 
 .form-box a span, .login-box a span {
@@ -204,7 +204,7 @@ body {
 	left: -100%;
 	width: 100%;
 	height: 2px;
-	background: linear-gradient(90deg, transparent, #03e9f4);
+	background: linear-gradient(90deg, transparent, #d97442);
 	animation: btn-anim1 1s linear infinite;
 }
 
@@ -222,7 +222,7 @@ body {
 	right: 0;
 	width: 2px;
 	height: 100%;
-	background: linear-gradient(180deg, transparent, #03E9F4);
+	background: linear-gradient(180deg, transparent, #d97442);
 	animation: btn-anim2 1s linear infinite;
 	animation-delay: .25s;
 }
@@ -241,7 +241,7 @@ body {
 	right: -100%;
 	width: 100%;
 	height: 2px;
-	background: linear-gradient(270deg, transparent, #03E9F4);
+	background: linear-gradient(270deg, transparent, #d97442);
 	animation: btn-anim3 1s linear infinite;
 	animation-delay: .5s;
 }
