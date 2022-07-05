@@ -75,8 +75,8 @@ if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.
   config.baseURL = `http://localhost:${port}`;
 }
 
-let globalUser;
-let urls;
+var globalUser;
+var urls;
 
 // ROUTES
 // ==============================================
@@ -89,7 +89,7 @@ app.use(function (req, res, next) {
   globalUser = res.locals.user;
   if(globalUser){
     urls = getURLData();
-    console.log('URLS >>>' + urls);
+    console.log('URLS >>>' + JSON.stringify(urls));
   }
   next();
 });
@@ -274,7 +274,7 @@ function getURLData(){
       return pool.query(queryString)
     })
     .then(databaseQuery => {
-      console.log('DB QUERY >> ' + databaseQuery);
+      console.log('DB QUERY >> ' + JSON.stringify(databaseQuery));
       resolve(databaseQuery);
     })
     .catch(e => {
