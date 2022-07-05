@@ -94,9 +94,6 @@ app.use(function (req, res, next) {
 });
 
 router.get('/', function(req, res) {
-  console.log('User >> ' + res.locals.user);
-  console.log('EMAIL >> ' + res.locals.user.email);
-  console.log('globalUser >> ' + globalUser);
   res.render("index.pug");
 });
 
@@ -108,9 +105,6 @@ app.get('/profile', requiresAuth(), (req, res) => {
 
 
 router.get('/home', function(req, res) {
-  console.log('User >> ' + res.locals.user);
-  console.log('EMAIL >> ' + res.locals.user.email);
-  console.log('globalUser >> ' + globalUser);
   res.render("index.pug");
 });
 

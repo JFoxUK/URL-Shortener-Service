@@ -27,7 +27,7 @@ html
                                     |BACK
                 if messageShow == true
                     p.toast-message #{message}
-                if user == true
+                if user.email != null
                     p.toast-message Logged In - #{user.email}
                 form#login_form.form(action='/login', method='POST')
                     div.url-box
