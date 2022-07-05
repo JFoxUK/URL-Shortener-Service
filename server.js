@@ -57,7 +57,7 @@ app.use(express.static(__dirname + '/views/includes/public'));
 app.set('view engine', 'pug');
 app.set('views','./views');
 const config = {
-  authRequired: false,
+  authRequired: true,
   auth0Logout: true,
   baseURL: 'https://jfoxuk-urlshortener.herokuapp.com/'
 };
