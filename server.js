@@ -40,18 +40,30 @@ router.post('/create', async function(req, res) {
 
 // BASE SETUP
 // ==============================================
+const dotenv = require('dotenv');
 var express = require('express');
+dotenv.load();
 var app     = express();
 var router  = express.Router();
-var port    =   process.env.PORT || 8080;
 const session = require('express-session');
 var bodyParser = require('body-parser');
-var jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const { window } = new JSDOM();
-const { document } = (new JSDOM('')).window;
-global.document = document;
-var $ = jQuery = require('jquery')(window);
+const http = require('http');
+const logger = require('morgan');
+const { auth } = require('express-openid-connect');
+  
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/views/includes/public'));
+app.set('view engine', 'pug');
+app.set('views','./views');
+const config = {
+  authRequired: false,
+  auth0Logout: true
+};
 
 var NO_RECORD_FOUND_MESSAGE = 'No record found'
 const { Pool, Client } = require('pg');
@@ -60,26 +72,20 @@ const connectionString = {
   ssl: { rejectUnauthorized: false } 
 };
 let pool;
-  
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'pug');
-app.set('views','./views');
-app.use(express.static(__dirname + '/views/includes/public'));
 
+const port = process.env.PORT || 3000;
+if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.NODE_ENV !== 'production') {
+  config.baseURL = `http://localhost:${port}`;
+}
 
 // ROUTES
 // ==============================================
-router.use(function(req, res, next) {
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// Middleware to make the `user` object available for all views
+app.use(function (req, res, next) {
+  res.locals.user = req.oidc.user;
   next();
 });
 
@@ -88,6 +94,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/home', function(req, res) {
+  console.log(res.locals.user);
   res.render("index.pug");
 });
 
@@ -150,33 +157,6 @@ router.get('/r/:shortUrl', function(req, res) {
         res.render("index.pug");
       })
   )
-});
-
-app.post('/login', function(request, response) {
-	// Capture the input fields
-	let username = request.body.username;
-	let password = request.body.password;
-	// Ensure the input fields exists and are not empty
-	if (username && password) {
-		// Execute SQL query that'll select the account from the database based on the specified username and password
-		connectDatabase.then(
-      queryUser(username, password)
-        .then( (userQueryRes) => {
-          console.log('>>>>>>>>>>>>>> USER FOUND AND CORRECT  <<<<<<<<<<<<<  == ' + JSON.stringify(userQueryRes));
-          request.session.loggedin = true;
-          request.session.username = username;
-          console.log(request.session);
-          console.log(request.session.username);
-          response.send('Logged In Sucessfully!');
-          response.end();
-        })
-        .catch(e => {
-          console.log(e);
-          response.send('Incorrect Username and/or Password!');
-          response.end();
-        })
-    )
-	}
 });
 
 router.get('*', function(req, res){
@@ -318,5 +298,5 @@ function getIdForDB(){
 
 // START THE SERVER
 // ==============================================
-app.listen(port);
+app.listen(port, () => console.log('listening on ' + port));
 pool.on('connect', () => console.log('connected to db'));
