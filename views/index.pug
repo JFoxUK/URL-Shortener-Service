@@ -75,10 +75,10 @@ html
                             each row in urlObjForTable
                                 tr.dataTableDiv-row
                                     td.dataTableDiv-data.dataTableDiv-data-url
-                                        a(href=`#{row.longurl}`)
+                                        a(href=`row.longurl`)
                                             |#{row.longurl}
                                     td.dataTableDiv-data.dataTableDiv-data-url
-                                        a(href="#")
+                                        a(href=`https://jfoxuk-urlshortener.herokuapp.com/r/ + row.shorturl`)
                                             |#{row.shorturl}
                                     td.dataTableDiv-data.dataTableDiv-data-clicks
                                         |#{row.clicks}
