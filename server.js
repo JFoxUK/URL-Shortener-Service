@@ -270,7 +270,8 @@ function getURLData(){
     connectDatabase.then()
     .then(() => {
       console.log('globalUser.email ?>? ' + globalUser.email);
-      let queryString = `SELECT id, long_url, short_url, date_created, username FROM url_store WHERE username =  '\${globalUser.email}\'`;
+    
+      let queryString = `SELECT id, long_url, short_url, date_created, username FROM url_store WHERE username = \'${globalUser.email}\'`;
       console.log('queryString >>> " '+ queryString);
       return pool.query(queryString)
     })
