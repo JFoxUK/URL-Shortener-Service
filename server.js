@@ -77,6 +77,7 @@ if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.
 
 var globalUser;
 var userUrlsData;
+var myURLs;
 
 // ROUTES
 // ==============================================
@@ -90,6 +91,10 @@ app.use(function (req, res, next) {
   if(globalUser){
     userUrlsData = getURLData().then(urlDataRes => {
       console.log('URLS > ' + JSON.stringify(urlDataRes));
+      urlDataRes.rows.forEach(row => {
+        console.log('ROW Username ' + row.username);
+        
+      });
       next();
     })
   }else{
