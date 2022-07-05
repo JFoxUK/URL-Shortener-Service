@@ -260,7 +260,7 @@ function insertDatabase(shortUrl, longUrl){
     }else{
       usernameEmail = '000000';
     }
-    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, number_of_clicks, username) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', \'${usernameEmail}\')`;
+    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, username) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', \'${usernameEmail}\')`;
 
     pool.query(queryString)
     .then(res => {
