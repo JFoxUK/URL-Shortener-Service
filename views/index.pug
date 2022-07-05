@@ -74,16 +74,17 @@ html
                                         |Short URL
                                     th.dataTableDiv-header.dataTableDiv-header-clicks
                                         |Clicks
-                                each row in urlObjForTable
-                                    tr.dataTableDiv-row
-                                        td.dataTableDiv-data.dataTableDiv-data-url
-                                            a(href="#")
-                                                |#{row.longurl}
-                                        td.dataTableDiv-data.dataTableDiv-data-url
-                                            a(href="#")
-                                                |#{row.shorturl}
-                                        td.dataTableDiv-data.dataTableDiv-data-clicks
-                                            |#{row.clicks}
+                                if urlObjForTable
+                                    each row in urlObjForTable
+                                        tr.dataTableDiv-row
+                                            td.dataTableDiv-data.dataTableDiv-data-url
+                                                a(href="#")
+                                                    |#{row.longurl}
+                                            td.dataTableDiv-data.dataTableDiv-data-url
+                                                a(href="#")
+                                                    |#{row.shorturl}
+                                            td.dataTableDiv-data.dataTableDiv-data-clicks
+                                                |#{row.clicks}
                     else
                         p.toast-message 
                             |Please Login to see your URLs.
