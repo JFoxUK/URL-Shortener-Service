@@ -17,14 +17,14 @@ body {
 	transition: all 0.5s ease;
 }
 
-.tooltip-container{
+.tooltip-container-info, .tooltip-container-back{
 	position:absolute;
 	top:0;
 	right:0;
 	margin: 2%;
 }
 
-.tooltip, .login_button, .back_button{
+.tooltip-info, .tooltip-back, .login_button, .back_button{
 	padding: 10px;
 	color: #03E9F4;
 	font-size: 10px;
@@ -42,7 +42,7 @@ body {
 	margin: 2%;
 }
 
-.tooltip:hover, .login_button:hover, .back_button:hover{
+.tooltip-info:hover, .tooltip-back:hover, .login_button:hover, .back_button:hover{
   	background: #03E9F4;
 	color: #F1EEE6;
 	border-radius: 5px;

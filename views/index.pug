@@ -11,13 +11,20 @@ html
             div.form-box
                 h2
                     |URL Shortener
-                    div.tooltip-container
-                        a.tooltip(href="#")
+                    div.tooltip-container-info
+                        a.tooltip-info(href="#")
                                     span
                                     span
                                     span
                                     span
                                     |INFO
+                    div.tooltip-container-back.hidden
+                        a.tooltip-back(href="#")
+                                    span
+                                    span
+                                    span
+                                    span
+                                    |BACK
                     div.login_button-container
                         if user
                             a.login_button(href="/logout")
@@ -53,6 +60,19 @@ html
                         span
                         span
                         |Create
+                div.url-container.hidden
+                    div.dataTableDiv
+                        table
+                            tr
+                                th
+                                    |URL
+                                th
+                                    |Clicks
+                            tr
+                                td 
+                                    |gogole.com 
+                                td 
+                                    |100
         script.
             function submitForm(elementId) {
                 let element = document.getElementById(elementId);
