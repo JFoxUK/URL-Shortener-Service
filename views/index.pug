@@ -8,42 +8,6 @@ html
         link(rel='stylesheet', href='/css/global.css')
     body
         div.full-container
-            div.login-box.hidden
-                h2
-                    |Login
-                    div.tooltip-container
-                        a.tooltip(href="#")
-                                    span
-                                    span
-                                    span
-                                    span
-                                    |INFO
-                    div.back_button-container
-                        a.back_button(href="#")
-                                    span
-                                    span
-                                    span
-                                    span
-                                    |BACK
-                if messageShow == true
-                    p.toast-message #{message}
-                if user
-                    p.toast-message #{user.email}
-                form#login_form.form(action='/login', method='POST')
-                    div.url-box
-                        input(type="text" name='username' required="")
-                        label
-                            |Username
-                    div.url-box
-                        input(type="text" name='password' required="")
-                        label
-                            |Password
-                    a.submit-button(href="#", onclick='submitForm("login_form")')
-                        span
-                        span
-                        span
-                        span
-                        |Submit
             div.form-box
                 h2
                     |URL Shortener
@@ -55,12 +19,23 @@ html
                                     span
                                     |INFO
                     div.login_button-container
-                        a.login_button(href="#")
+                        if user
+                            a.login_button(href="/logout")
                                     span
                                     span
                                     span
                                     span
-                                    |LOGIN
+                                    |LOGOUT
+                        else
+                            a.login_button(href="/login")
+                                        span
+                                        span
+                                        span
+                                        span
+                                        |LOGIN
+                if user
+                    p.toast-message 
+                        |Logged in as #{user.email}
                 if messageShow == true
                     p.toast-message #{message}
                 form#shorten-url_form.form(action='/create', method='POST')
