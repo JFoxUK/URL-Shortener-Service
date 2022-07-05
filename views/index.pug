@@ -60,8 +60,9 @@ html
                         span
                         span
                         |Create
-                if user
-                    div.url-container.hidden
+                
+                div.url-container.hidden
+                    if user
                         p.dataTableDiv-info
                             |Below, you will see YOUR created URLs, thier short URLs and how many clicks each have had:
                         div.dataTableDiv
@@ -83,9 +84,9 @@ html
                                                 |#{row.shorturl}
                                         td.dataTableDiv-data.dataTableDiv-data-clicks
                                             |#{row.clicks}
-                else
-                    p.toast-message 
-                        |Please Login to see your URLS
+                    else
+                        p.toast-message 
+                            |Please Login to see your URLs.
                             
         script.
             function submitForm(elementId) {
