@@ -29,7 +29,7 @@ html
                     p.toast-message #{message}
                 if user == true
                     p.toast-message
-                    |Logged In - #{user.email}
+                        |Logged In - #{user.email}
                 form#login_form.form(action='/login', method='POST')
                     div.url-box
                         input(type="text" name='username' required="")
