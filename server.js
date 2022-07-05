@@ -102,7 +102,8 @@ app.get('/profile', requiresAuth(), (req, res) => {
 
 
 router.get('/home', function(req, res) {
-  console.log(res.locals.user);
+  console.log('User >> ' + res.locals.user);
+  console.log('EMAIL >> ' + res.locals.user.email);
   res.render("index.pug");
 });
 
