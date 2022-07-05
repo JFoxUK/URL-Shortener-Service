@@ -76,8 +76,7 @@ if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.
 }
 
 var globalUser;
-var userUrlsData;
-var myURLs;
+var myURLsData = [];
 
 // ROUTES
 // ==============================================
@@ -92,9 +91,15 @@ app.use(function (req, res, next) {
     userUrlsData = getURLData().then(urlDataRes => {
       console.log('URLS > ' + JSON.stringify(urlDataRes));
       urlDataRes.rows.forEach(row => {
-        console.log('ROW Username ' + row.username);
+        let userUrlsData = {
+          "longurl" : row.long_url,
+          "shorturl" : row.short_url,
+          "clicks" : row.number_of_clicks
+        };
+        myURLsData.push(userUrlsData);
         
       });
+      console.log('FORMATTED URLS FOR TEMPLATE >> ' + myURLsData);
       next();
     })
   }else{
@@ -258,7 +263,7 @@ function insertDatabase(shortUrl, longUrl){
     }else{
       usernameEmail = '000000';
     }
-    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, username) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', \'${usernameEmail}\')`;
+    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, number_of_clicks, username) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', \'${usernameEmail}\')`;
 
     pool.query(queryString)
     .then(res => {
@@ -280,7 +285,7 @@ function getURLData(){
     .then(() => {
       console.log('globalUser.email ?>? ' + globalUser.email);
     
-      let queryString = `SELECT id, long_url, short_url, date_created, username FROM url_store WHERE username = \'${globalUser.email}\'`;
+      let queryString = `SELECT id, long_url, short_url, date_created, number_of_clicks, username FROM url_store WHERE username = \'${globalUser.email}\'`;
       console.log('queryString >>> " '+ queryString);
       return pool.query(queryString)
     })
