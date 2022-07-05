@@ -79,6 +79,8 @@ if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.
   config.baseURL = `http://localhost:${port}`;
 }
 
+let globalUser;
+
 // ROUTES
 // ==============================================
 // auth router attaches /login, /logout, and /callback routes to the baseURL
@@ -87,10 +89,14 @@ app.use(auth(config));
 // Middleware to make the `user` object available for all views
 app.use(function (req, res, next) {
   res.locals.user = req.oidc.user;
+  globalUser = res.locals.user;
   next();
 });
 
 router.get('/', function(req, res) {
+  console.log('User >> ' + res.locals.user);
+  console.log('EMAIL >> ' + res.locals.user.email);
+  console.log('globalUser >> ' + globalUser);
   res.render("index.pug");
 });
 
@@ -104,6 +110,7 @@ app.get('/profile', requiresAuth(), (req, res) => {
 router.get('/home', function(req, res) {
   console.log('User >> ' + res.locals.user);
   console.log('EMAIL >> ' + res.locals.user.email);
+  console.log('globalUser >> ' + globalUser);
   res.render("index.pug");
 });
 
@@ -236,30 +243,18 @@ var checkDatabase = function(shortUrl, isCreate) {
 
 };
 
-function queryUser(username, password){
-  return new Promise(function(resolve, reject){
-    let queryString = `SELECT id, username, email FROM user_store WHERE username = \'${username}\' AND password = \'${password}\'`;
-
-    pool.query(queryString)
-    .then(res => {
-      resolve(res);
-    })
-    .catch(e => {
-      reject(Error(e));
-    })
-
-
-  });
-
-};
-
 function insertDatabase(shortUrl, longUrl){
   let idForDB = getIdForDB();
   let dateFormatted = getFormatDate();
   return new Promise(function(resolve, reject){
     console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
-    //GUEST USER_ID = 000000
-    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, user_id) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', '000000')`;
+    let usernameEmail;
+    if(globalUser != null){
+      usernameEmail = globalUser.email;
+    }else{
+      usernameEmail = '000000';
+    }
+    let queryString = `INSERT INTO url_store (id, long_url, short_url, date_created, username) VALUES (\'${idForDB}\', \'${longUrl}\', \'${shortUrl}\', \'${dateFormatted}\', \'${usernameEmail}\')`;
 
     pool.query(queryString)
     .then(res => {
