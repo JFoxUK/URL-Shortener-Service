@@ -76,7 +76,7 @@ if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.
 }
 
 var globalUser;
-var urls;
+var userUrlsData;
 
 // ROUTES
 // ==============================================
@@ -88,10 +88,14 @@ app.use(function (req, res, next) {
   res.locals.user = req.oidc.user;
   globalUser = res.locals.user;
   if(globalUser){
-    urls = getURLData();
-    console.log('URLS >>>' + JSON.stringify(urls));
+    userUrlsData = getURLData().then(urlDataRes => {
+      console.log('URLS > ' + JSON.stringify(urlDataRes));
+      next();
+    })
+  }else{
+    next();
   }
-  next();
+  
 });
 
 router.get('/', function(req, res) {
