@@ -62,7 +62,8 @@ app.set('view engine', 'pug');
 app.set('views','./views');
 const config = {
   authRequired: false,
-  auth0Logout: true
+  auth0Logout: true,
+  baseURL: 'https://jfoxuk-urlshortener.herokuapp.com/'
 };
 
 var NO_RECORD_FOUND_MESSAGE = 'No record found'
@@ -92,6 +93,13 @@ app.use(function (req, res, next) {
 router.get('/', function(req, res) {
   res.render("index.pug");
 });
+
+const { requiresAuth } = require('express-openid-connect');
+
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
+});
+
 
 router.get('/home', function(req, res) {
   console.log(res.locals.user);
