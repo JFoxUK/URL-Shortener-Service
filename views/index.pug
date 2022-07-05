@@ -60,28 +60,32 @@ html
                         span
                         span
                         |Create
-                div.url-container.hidden
-                    p.dataTableDiv-info
-                        |Below, you will see YOUR created URLs, thier short URLs and how many clicks each have had:
-                    div.dataTableDiv
-                        table.dataTableDiv-table
-                            tr.dataTableDiv-row
-                                th.dataTableDiv-header.dataTableDiv-header-url
-                                    |Long URL
-                                th.dataTableDiv-header.dataTableDiv-header-url
-                                    |Short URL
-                                th.dataTableDiv-header.dataTableDiv-header-clicks
-                                    |Clicks
-                            each row in urlObjForTable
+                if user
+                    div.url-container.hidden
+                        p.dataTableDiv-info
+                            |Below, you will see YOUR created URLs, thier short URLs and how many clicks each have had:
+                        div.dataTableDiv
+                            table.dataTableDiv-table
                                 tr.dataTableDiv-row
-                                    td.dataTableDiv-data.dataTableDiv-data-url
-                                        a(href=`row.longurl`)
-                                            |#{row.longurl}
-                                    td.dataTableDiv-data.dataTableDiv-data-url
-                                        a(href=`https://jfoxuk-urlshortener.herokuapp.com/r/ + row.shorturl`)
-                                            |#{row.shorturl}
-                                    td.dataTableDiv-data.dataTableDiv-data-clicks
-                                        |#{row.clicks}
+                                    th.dataTableDiv-header.dataTableDiv-header-url
+                                        |Long URL
+                                    th.dataTableDiv-header.dataTableDiv-header-url
+                                        |Short URL
+                                    th.dataTableDiv-header.dataTableDiv-header-clicks
+                                        |Clicks
+                                each row in urlObjForTable
+                                    tr.dataTableDiv-row
+                                        td.dataTableDiv-data.dataTableDiv-data-url
+                                            a(href=`row.longurl`)
+                                                |#{row.longurl}
+                                        td.dataTableDiv-data.dataTableDiv-data-url
+                                            a(href=`https://jfoxuk-urlshortener.herokuapp.com/r/ + row.shorturl`)
+                                                |#{row.shorturl}
+                                        td.dataTableDiv-data.dataTableDiv-data-clicks
+                                            |#{row.clicks}
+                else
+                    p.toast-message 
+                        |Please Login to see your URLS
                             
         script.
             function submitForm(elementId) {
