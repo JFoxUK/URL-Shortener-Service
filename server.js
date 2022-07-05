@@ -59,7 +59,6 @@ app.set('views','./views');
 const config = {
   authRequired: false,
   auth0Logout: true,
-  auto_login: false,
   baseURL: 'https://jfoxuk-urlshortener.herokuapp.com/'
 };
 
