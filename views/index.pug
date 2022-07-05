@@ -72,43 +72,17 @@ html
                                     |Short URL
                                 th.dataTableDiv-header.dataTableDiv-header-clicks
                                     |Clicks
-                            tr.dataTableDiv-row
-                                td.dataTableDiv-data.dataTableDiv-data-url
-                                    a(href="#")
-                                        |gogole.com 
-                                td.dataTableDiv-data.dataTableDiv-data-url
-                                    a(href="#")
-                                        |https://jfoxuk-urlshortener.herokuapp.com/r/google
-                                td.dataTableDiv-data.dataTableDiv-data-clicks
-                                    |100
-                            tr.dataTableDiv-row
-                                td.dataTableDiv-data.dataTableDiv-data-url
-                                    a(href="#")
-                                        |gogole.com 
-                                td.dataTableDiv-data.dataTableDiv-data-url
-                                    a(href="#")
-                                        |https://jfoxuk-urlshortener.herokuapp.com/r/google
-                                td.dataTableDiv-data.dataTableDiv-data-clicks
-                                    |100
-                            tr.dataTableDiv-row
-                                td.dataTableDiv-data.dataTableDiv-data-url
-                                    a(href="#")
-                                        |gogole.com 
-                                td.dataTableDiv-data.dataTableDiv-data-url
-                                    a(href="#")
-                                        |https://jfoxuk-urlshortener.herokuapp.com/r/google
-                                td.dataTableDiv-data.dataTableDiv-data-clicks
-                                    |100
-
-                            tr.dataTableDiv-row
-                                td.dataTableDiv-data.dataTableDiv-data-url
-                                    a(href="#")
-                                        |gogole.com 
-                                td.dataTableDiv-data.dataTableDiv-data-url
-                                    a(href="#")
-                                        |https://jfoxuk-urlshortener.herokuapp.com/r/google
-                                td.dataTableDiv-data.dataTableDiv-data-clicks
-                                    |100
+                            each row in urlObjForTable
+                                tr.dataTableDiv-row
+                                    td.dataTableDiv-data.dataTableDiv-data-url
+                                        a(href=`#{row.longurl}`)
+                                            |#{row.longurl}
+                                    td.dataTableDiv-data.dataTableDiv-data-url
+                                        a(href="#")
+                                            |#{row.shorturl}
+                                    td.dataTableDiv-data.dataTableDiv-data-clicks
+                                        |#{row.clicks}
+                            
         script.
             function submitForm(elementId) {
                 let element = document.getElementById(elementId);

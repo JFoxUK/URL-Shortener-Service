@@ -97,7 +97,7 @@ app.use(function (req, res, next) {
           "clicks" : row.number_of_clicks
         };
         myURLsData.push(userUrlsData);
-        
+        res.locals.urlObjForTable = myURLsData;
       });
       console.log('FORMATTED URLS FOR TEMPLATE >> ' + myURLsData);
       next();
