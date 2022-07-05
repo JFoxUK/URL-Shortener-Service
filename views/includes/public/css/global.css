@@ -52,6 +52,58 @@ body {
 		0 0 100px #03E9F4;
 }
 
+.dataTableDiv{
+	height: 20vh;
+	overflow-y: scroll;
+	
+}
+.dataTableDiv-table{
+	border-collapse:collapse;
+	table-layout: fixed;
+	width: 100%;
+}
+.dataTableDiv-row{
+
+}
+.dataTableDiv-header{
+	color: #F1EEE6;
+	border:1px solid #03E9F4;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 1%;
+	text-align: center;
+}
+.dataTableDiv-header-url{
+
+}
+.dataTableDiv-header-clicks{
+	
+
+}
+.dataTableDiv-data{
+	border:1px solid #03E9F4;
+	font-size: 12px;
+	word-wrap:break-word;
+	text-align: center;
+
+}
+.dataTableDiv-data-url, .dataTableDiv-data-url a:link, .dataTableDiv-data-url a:active, .dataTableDiv-data-url a:visited{
+	color: #03E9F4;
+	font-size: 12px;
+}
+.dataTableDiv-data-url a:hover{
+	color: #F1EEE6;
+	
+}
+.dataTableDiv-data-clicks{
+	color: #F1EEE6;
+	font-size: 12px;
+}
+.dataTableDiv-info{
+	color: #F1EEE6;
+	font-size: 12px;
+}
+
 .form{
 	padding-top: 10%;
   }

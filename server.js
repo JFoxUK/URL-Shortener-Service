@@ -4,14 +4,10 @@ GLOBAL TODO LIST:
 - Add validation to Long URL to include http(s)://www.
 - Escape quotes etc on inputs from malicious code
 - Break server.js up into seperate files
-- Better style who page
 - Add 404
 - Make Long URL required but if short URL is missing, generate random 6 char string
-- Add login leaf at top left
 - Animate full box to flip on click of login or INFO
-- Login presents with User/pass or Social Signup/in
-- Top center (when logged in) - click to flip to see 'my URLS'
-- Handle logins
+
 
 
 - Look to change promise.then into async await simialr to:
@@ -80,6 +76,7 @@ if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.
 }
 
 let globalUser;
+let urls;
 
 // ROUTES
 // ==============================================
@@ -90,6 +87,10 @@ app.use(auth(config));
 app.use(function (req, res, next) {
   res.locals.user = req.oidc.user;
   globalUser = res.locals.user;
+  if(globalUser){
+    urls = getURLData();
+    console.log('URLS >>>' + urls);
+  }
   next();
 });
 
@@ -263,6 +264,25 @@ function insertDatabase(shortUrl, longUrl){
   });
 
 };
+
+function getURLData(){
+  return new Promise(function(resolve, reject){
+    connectDatabase.then()
+    .then(() => {
+      let queryString = `SELECT id, long_url, short_url, date_created, username FROM url_store WHERE username =  '\${globalUser.email}\'`;
+      console.log('queryString >>> " '+ queryString);
+      return pool.query(queryString)
+    })
+    .then(databaseQuery => {
+      console.log('DB QUERY >> ' + databaseQuery);
+      resolve(databaseQuery);
+    })
+    .catch(e => {
+      console.error(e);
+      reject(Error(e));
+    })
+  })
+}
 
 
 

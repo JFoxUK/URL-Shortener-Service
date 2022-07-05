@@ -61,17 +61,53 @@ html
                         span
                         |Create
                 div.url-container.hidden
+                    p.dataTableDiv-info
+                        |Below, you will see YOUR created URLs, thier short URLs and how many clicks each have had:
                     div.dataTableDiv
-                        table
-                            tr
-                                th
-                                    |URL
-                                th
+                        table.dataTableDiv-table
+                            tr.dataTableDiv-row
+                                th.dataTableDiv-header.dataTableDiv-header-url
+                                    |Long URL
+                                th.dataTableDiv-header.dataTableDiv-header-url
+                                    |Short URL
+                                th.dataTableDiv-header.dataTableDiv-header-clicks
                                     |Clicks
-                            tr
-                                td 
-                                    |gogole.com 
-                                td 
+                            tr.dataTableDiv-row
+                                td.dataTableDiv-data.dataTableDiv-data-url
+                                    a(href="#")
+                                        |gogole.com 
+                                td.dataTableDiv-data.dataTableDiv-data-url
+                                    a(href="#")
+                                        |https://jfoxuk-urlshortener.herokuapp.com/r/google
+                                td.dataTableDiv-data.dataTableDiv-data-clicks
+                                    |100
+                            tr.dataTableDiv-row
+                                td.dataTableDiv-data.dataTableDiv-data-url
+                                    a(href="#")
+                                        |gogole.com 
+                                td.dataTableDiv-data.dataTableDiv-data-url
+                                    a(href="#")
+                                        |https://jfoxuk-urlshortener.herokuapp.com/r/google
+                                td.dataTableDiv-data.dataTableDiv-data-clicks
+                                    |100
+                            tr.dataTableDiv-row
+                                td.dataTableDiv-data.dataTableDiv-data-url
+                                    a(href="#")
+                                        |gogole.com 
+                                td.dataTableDiv-data.dataTableDiv-data-url
+                                    a(href="#")
+                                        |https://jfoxuk-urlshortener.herokuapp.com/r/google
+                                td.dataTableDiv-data.dataTableDiv-data-clicks
+                                    |100
+
+                            tr.dataTableDiv-row
+                                td.dataTableDiv-data.dataTableDiv-data-url
+                                    a(href="#")
+                                        |gogole.com 
+                                td.dataTableDiv-data.dataTableDiv-data-url
+                                    a(href="#")
+                                        |https://jfoxuk-urlshortener.herokuapp.com/r/google
+                                td.dataTableDiv-data.dataTableDiv-data-clicks
                                     |100
         script.
             function submitForm(elementId) {
