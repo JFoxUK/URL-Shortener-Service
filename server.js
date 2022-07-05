@@ -89,7 +89,6 @@ app.use(function (req, res, next) {
   globalUser = res.locals.user;
   if(globalUser){
     userUrlsData = getURLData().then(urlDataRes => {
-      console.log('URLS > ' + JSON.stringify(urlDataRes));
       urlDataRes.rows.forEach(row => {
         let userUrlsData = {
           "longurl" : row.long_url,
@@ -99,7 +98,6 @@ app.use(function (req, res, next) {
         myURLsData.push(userUrlsData);
         res.locals.urlObjForTable = myURLsData;
       });
-      console.log('FORMATTED URLS FOR TEMPLATE >> ' + myURLsData);
       next();
     })
   }else{
@@ -135,29 +133,22 @@ router.post('/create', function(req, res) {
           connectDatabase.then(
             insertDatabase(shortUrl, longUrl)
               .then( () => {
-                //SURFACE SUCCESS MESSAGE NEEDED HERE
                 res.locals.messageShow = true;
                 res.locals.message = 'Short URL created - ' + req.get('host') + '/r/' + shortUrl;
                 res.render("index.pug");
-                //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
               })
               .catch(e => {
-                //SURFACE ERROR MESSAGE NEEDED HERE
                 res.locals.messageShow = true;
                 res.locals.message = e;
                 res.render("index.pug");
-                //NEEDS TO REDIRECT BACK TO HOME WITH SUCCESS MESSAGE
               })
           )
         }else{
-          //SURAFCE ERROR MESSAGE needed here as record exists
-          //'*********** SURAFCE ERROR MESSAGE needed here \'Choose a different short URL\'
           res.locals.messageShow = true;
           res.locals.message = 'Short URL already exists';
           res.render("index.pug");
         }
       })
-      //FATAL ERROR PAGE NEEDED OR SURFAE FATAL ERROR
       .catch(e => {
         console.error(e);
         res.locals.messageShow = true;
@@ -175,8 +166,7 @@ router.get('/r/:shortUrl', function(req, res) {
       .then( datdabaseRes => {
         res.redirect(datdabaseRes);
       })
-      .catch(e => {
-        //SURFACE ERROR MESSAGE NEEDED HERE
+      .catch(e => {E
         res.locals.messageShow = true;
         res.locals.message = e;
         res.render("index.pug");
@@ -256,7 +246,6 @@ function insertDatabase(shortUrl, longUrl){
   let idForDB = getIdForDB();
   let dateFormatted = getFormatDate();
   return new Promise(function(resolve, reject){
-    console.log(`${idForDB}, ${longUrl}, ${shortUrl}, ${dateFormatted}`);
     let usernameEmail;
     if(globalUser != null){
       usernameEmail = globalUser.email;
@@ -283,14 +272,11 @@ function getURLData(){
   return new Promise(function(resolve, reject){
     connectDatabase.then()
     .then(() => {
-      console.log('globalUser.email ?>? ' + globalUser.email);
-    
       let queryString = `SELECT id, long_url, short_url, date_created, number_of_clicks, username FROM url_store WHERE username = \'${globalUser.email}\'`;
       console.log('queryString >>> " '+ queryString);
       return pool.query(queryString)
     })
     .then(databaseQuery => {
-      console.log('DB QUERY >> ' + JSON.stringify(databaseQuery));
       resolve(databaseQuery);
     })
     .catch(e => {
