@@ -182,12 +182,14 @@ router.get('*', function(req, res){
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.locals.messageShow = true;
-  if(err.message)
-  res.locals.message = err.message;
-  res.locals.message.replace('unauthorized', '');
-  res.locals.message.replace('(', '');
-  res.locals.message.replace(')', '');
-  res.render("index.pug");
+  if(err.message){
+    let message = err.message;
+    message.replace('unauthorized', '');
+    message.replace('(', '');
+    message.replace(')', '');
+    res.locals.message = message;
+    res.render("index.pug");
+  }
 });
 
 // apply the routes to our application
