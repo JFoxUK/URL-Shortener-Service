@@ -179,6 +179,13 @@ router.get('*', function(req, res){
   res.send('404 - NOT FOUND');
 });
 
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.locals.messageShow = true;
+        res.locals.message = err.message;
+        res.render("index.pug");
+});
+
 // apply the routes to our application
 app.use('/', router);
 
