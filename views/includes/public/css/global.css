@@ -260,7 +260,7 @@ body {
 	left: 0;
 	width: 2px;
 	height: 100%;
-	background: linear-gradient(360deg, transparent, #30E9F4);
+	background: linear-gradient(360deg, transparent, #d97442);
 	animation: btn-anim4 1s linear infinite;
 	animation-delay: .75s;
 }
