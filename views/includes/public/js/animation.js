@@ -13,8 +13,9 @@ $(window).on("load", function () {
 	});
    $("#shorten-url_form").on("submit", function () {
       setTimeout(function () {
+         console.log('HERE');
          window.location.href = "/home";
-         window.clearTimeout(tID);		// clear time out.
+         
      }, 5000);
     });
 });
