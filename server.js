@@ -215,7 +215,7 @@ var connectDatabase = new Promise(function(resolve, reject){
 
 function incrementClicks(UrlRecordId, numberOfClicksForUpdate){
   return new Promise(function(resolve, reject){
-    let queryString = `UPDATE url_store SET number_of_clicks ${numberOfClicksForUpdate} WHERE id = \'${UrlRecordId}\'`;
+    let queryString = `UPDATE url_store SET number_of_clicks = ${numberOfClicksForUpdate} WHERE id = \'${UrlRecordId}\'`;
     pool.query(queryString)
     .then(res => {
       console.error(JSON.stringify(res));
