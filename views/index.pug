@@ -10,8 +10,8 @@ html
 		link(rel="icon", type="image/x-icon", href="/images/JFoxUK_logo.png")
 		link(rel="stylesheet", href="/css/global.css")
 	body
-		.full-container
-			.form-box
+		div.full-container
+			div.form-box
 				h2
 					| URL Shortener
 					.tooltip-container-info
@@ -64,33 +64,33 @@ html
 						span
 						| Create
 
-				.url-container.hidden
-					if user
-						p.dataTableDiv-info
-							| Below, you will see YOUR created URLs, thier short URLs and how many clicks each have had:
-						.dataTableDiv
-							table.dataTableDiv-table
-								tr.dataTableDiv-row
-									th.dataTableDiv-header.dataTableDiv-header-url
-										| Long URL
-									th.dataTableDiv-header.dataTableDiv-header-url
-										| Short URL
-									th.dataTableDiv-header.dataTableDiv-header-clicks
-										| Clicks
-								if urlObjForTable
-									each row in urlObjForTable
-										tr.dataTableDiv-row
-											td.dataTableDiv-data.dataTableDiv-data-url
-												a(href="#")
-													| #{row.longurl}
-											td.dataTableDiv-data.dataTableDiv-data-url
-												a(href="#")
-													| #{row.shorturl}
-											td.dataTableDiv-data.dataTableDiv-data-clicks
-												| #{row.clicks}
-					else
-						p.toast-message 
-							| Please Login to see your URLs.
+            div.url-container.hidden
+                if user
+                    p.dataTableDiv-info
+                        | Below, you will see YOUR created URLs, thier short URLs and how many clicks each have had:
+                    div.dataTableDiv
+                        table.dataTableDiv-table
+                            tr.dataTableDiv-row
+                                th.dataTableDiv-header.dataTableDiv-header-url
+                                    | Long URL
+                                th.dataTableDiv-header.dataTableDiv-header-url
+                                    | Short URL
+                                th.dataTableDiv-header.dataTableDiv-header-clicks
+                                    | Clicks
+                            if urlObjForTable
+                                each row in urlObjForTable
+                                    tr.dataTableDiv-row
+                                        td.dataTableDiv-data.dataTableDiv-data-url
+                                            a(href="#")
+                                                | #{row.longurl}
+                                        td.dataTableDiv-data.dataTableDiv-data-url
+                                            a(href="#")
+                                                | #{row.shorturl}
+                                        td.dataTableDiv-data.dataTableDiv-data-clicks
+                                            | #{row.clicks}
+                else
+                    p.toast-message 
+                        | Please Login to see your URLs.
 
 		script(
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
