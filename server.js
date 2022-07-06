@@ -135,10 +135,9 @@ router.post('/create', function(req, res) {
           connectDatabase.then(
             insertDatabase(shortUrl, longUrl)
               .then( () => {
-                res.redirect('/home');
                 res.locals.messageShow = true;
                 res.locals.message = 'Short URL created - ' + req.get('host') + '/r/' + shortUrl;
-                
+                res.render("index.pug");
               })
               .catch(e => {
                 res.locals.messageShow = true;
