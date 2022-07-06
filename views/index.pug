@@ -97,11 +97,11 @@ html
                 let element = document.getElementById(elementId);
                 console.log(element);
                 element.submit();
-                function stateChange(newState) {
-                    setTimeout(() => {
-                    window.location.href = 'https://jfoxuk-urlshortener.herokuapp.com/';
-                    }, 5000);
-                }
+                
+                setTimeout(() => {
+                window.location.href = 'https://jfoxuk-urlshortener.herokuapp.com/';
+                }, 5000);
+                
 			}
 		script(
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
