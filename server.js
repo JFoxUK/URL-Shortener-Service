@@ -1,11 +1,8 @@
 /*
 GLOBAL TODO LIST:
 
-- Add validation to Long URL to include http(s)://www.
-- Escape quotes etc on inputs from malicious code
 - Break server.js up into seperate files
-- Add 404
-- Make Long URL required but if short URL is missing, generate random 6 char string
+- Add 404 page
 - Animate full box to flip on click of login or INFO
 
 
@@ -125,7 +122,7 @@ router.get('/home', function(req, res) {
 
 router.post('/create', function(req, res) {
   //THESE TWO VARIABLES NEED CONVERTING TO STRING AND ESCAPING ' () {}
-  let shortUrl = req.body.shortUrl;
+  let shortUrl = (req.body.shortUrl).replace(/[^a-z0-9-]/gi, '');
   let longUrl = req.body.longUrl;
 
   connectDatabase.then(
