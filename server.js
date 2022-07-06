@@ -235,7 +235,7 @@ var checkDatabase = function(shortUrl, isCreate) {
   if(!isCreate){
   
   return new Promise(function(resolve, reject){
-    let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
+    let queryStringStandard = 'SELECT id, long_url, short_url, date_created, number_of_clicks FROM url_store WHERE short_url = ';
     let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
     pool.query(queryString)
@@ -254,7 +254,7 @@ var checkDatabase = function(shortUrl, isCreate) {
   });
   }else if(isCreate){
     return new Promise(function(resolve, reject){
-      let queryStringStandard = 'SELECT id, long_url, short_url, date_created FROM url_store WHERE short_url = ';
+      let queryStringStandard = 'SELECT id, long_url, short_url, date_created, number_of_clicks FROM url_store WHERE short_url = ';
       let queryString = queryStringStandard + '\'' + shortUrl.replace(/[^A-Z0-9]/ig, "") + '\'';
 
       pool.query(queryString)
