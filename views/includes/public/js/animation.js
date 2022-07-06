@@ -16,6 +16,6 @@ $(window).on("load", function () {
          console.log('HERE');
          window.location.href = "/home";
          
-     }, 5000);
+     }, 10000);
     });
 });
