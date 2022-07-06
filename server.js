@@ -137,7 +137,7 @@ router.post('/create', function(req, res) {
               .then( () => {
                 res.locals.messageShow = true;
                 res.locals.message = 'Short URL created - ' + req.get('host') + '/r/' + shortUrl;
-                res.render("index.pug");
+                res.redirect('/home');
               })
               .catch(e => {
                 res.locals.messageShow = true;
