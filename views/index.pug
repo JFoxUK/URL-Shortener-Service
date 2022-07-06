@@ -10,87 +10,87 @@ html
 		link(rel="icon", type="image/x-icon", href="/images/JFoxUK_logo.png")
 		link(rel="stylesheet", href="/css/global.css")
 	body
-		.full-container
-			.form-box
+		div.full-container
+			div.form-box
 				h2
-					| URL Shortener
-					.tooltip-container-info
-						a.tooltip-info(href="#")
-							span
-							span
-							span
-							span
-							| INFO
-					.tooltip-container-back.hidden
-						a.tooltip-back(href="#")
-							span
-							span
-							span
-							span
-							| BACK
-					.login_button-container
-						if user
-							a.login_button(href="/logout")
-								span
-								span
-								span
-								span
-								| LOGOUT
-						else
-							a.login_button(href="/login")
-								span
-								span
-								span
-								span
-								| LOGIN
-				if user
-					p.toast-message 
-						| Logged in as #{user.email}
-				if messageShow == true
-					p.toast-message #{message}
-				form#shorten-url_form.form(action="/create", method="POST")
-					.url-box
-						input(type="url", pattern="https://.*", name="longUrl", required)
-						label
-							| Long URL
-					.url-box
-						input(type="text", name="shortUrl", required)
-						label
-							| Short URL Suffix
-					button#createURLButton.submit-button(type="submit")
-						span
-						span
-						span
-						span
-						| Create
+				    | URL Shortener
+                div.tooltip-container-info
+                    a.tooltip-info(href="#")
+                        span
+                        span
+                        span
+                        span
+                        | INFO
+                div.tooltip-container-back.hidden
+                    a.tooltip-back(href="#")
+                        span
+                        span
+                        span
+                        span
+                        | BACK
+                div.login_button-container
+                    if user
+                        a.login_button(href="/logout")
+                            span
+                            span
+                            span
+                            span
+                            | LOGOUT
+                    else
+                        a.login_button(href="/login")
+                            span
+                            span
+                            span
+                            span
+                            | LOGIN
+                if user
+                    p.toast-message 
+                        | Logged in as #{user.email}
+                if messageShow == true
+                    p.toast-message #{message}
+                form#shorten-url_form.form(action="/create", method="POST")
+                    div.url-box
+                        input(type="url", pattern="https://.*", name="longUrl", required)
+                        label
+                            | Long URL
+                    div.url-box
+                        input(type="text", name="shortUrl", required)
+                        label
+                            | Short URL Suffix
+                    button#createURLButton.submit-button(type="submit")
+                        span
+                        span
+                        span
+                        span
+                        | Create
 
-				.url-container.hidden
-					if user
-						p.dataTableDiv-info
-							| Below, you will see YOUR created URLs, thier short URLs and how many clicks each have had:
-						.dataTableDiv
-							table.dataTableDiv-table
-								tr.dataTableDiv-row
-									th.dataTableDiv-header.dataTableDiv-header-url
-										| Long URL
-									th.dataTableDiv-header.dataTableDiv-header-url
-										| Short URL
-									th.dataTableDiv-header.dataTableDiv-header-clicks
-										| Clicks
-								if urlObjForTable
-									each row in urlObjForTable
-										tr.dataTableDiv-row
-											td.dataTableDiv-data.dataTableDiv-data-url
-												a(href="#")
-													| #{row.longurl}
-											td.dataTableDiv-data.dataTableDiv-data-url
-												a(href="#")
-													| #{row.shorturl}
-											td.dataTableDiv-data.dataTableDiv-data-clicks
-												| #{row.clicks}
-					else
-						p.toast-message 
-							| Please Login to see your URLs.
+            div.url-container.hidden
+                if user
+                    p.dataTableDiv-info
+                        | Below, you will see YOUR created URLs, thier short URLs and how many clicks each have had:
+                    div.dataTableDiv
+                        table.dataTableDiv-table
+                            tr.dataTableDiv-row
+                                th.dataTableDiv-header.dataTableDiv-header-url
+                                    | Long URL
+                                th.dataTableDiv-header.dataTableDiv-header-url
+                                    | Short URL
+                                th.dataTableDiv-header.dataTableDiv-header-clicks
+                                    | Clicks
+                            if urlObjForTable
+                                each row in urlObjForTable
+                                    tr.dataTableDiv-row
+                                        td.dataTableDiv-data.dataTableDiv-data-url
+                                            a(href="#")
+                                                | #{row.longurl}
+                                        td.dataTableDiv-data.dataTableDiv-data-url
+                                            a(href="#")
+                                                | #{row.shorturl}
+                                        td.dataTableDiv-data.dataTableDiv-data-clicks
+                                            | #{row.clicks}
+                else
+                    p.toast-message 
+                        | Please Login to see your URLs.
 
 		script(
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
