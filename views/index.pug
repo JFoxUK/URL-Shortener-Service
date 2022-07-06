@@ -47,7 +47,7 @@ html
                     p.toast-message #{message}
                 form#shorten-url_form.form(action='/create', method='POST')
                     div.url-box
-                        input(type="url" placeholder="https://example.com" pattern="https://.*" name='longUrl' required)
+                        input(type="url" pattern="https://.*" name='longUrl' required)
                         label
                             |Long URL
                     div.url-box
