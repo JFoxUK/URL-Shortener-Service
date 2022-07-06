@@ -89,6 +89,7 @@ app.use(function (req, res, next) {
   globalUser = res.locals.user;
   if(globalUser){
     userUrlsData = getURLData().then(urlDataRes => {
+      console.log(JSON.stringify('WHERE ARE THE DUPLICATES???? >>>>>> ' + urlDataRes.rows));
       urlDataRes.rows.forEach(row => {
         let userUrlsData = {
           "longurl" : row.long_url,
@@ -111,6 +112,7 @@ router.get('/', function(req, res) {
 });
 
 const { requiresAuth } = require('express-openid-connect');
+const { Console } = require('console');
 
 app.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
