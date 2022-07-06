@@ -12,6 +12,9 @@ $(window).on("load", function () {
 		$(".url-container").addClass("hidden");
 	});
    $("#shorten-url_form").on("submit", function () {
-      alert( "Handler for .submit() called." );
+      setTimeout(function () {
+         window.location.href = "/home";
+         window.clearTimeout(tID);		// clear time out.
+     }, 5000);
     });
 });
