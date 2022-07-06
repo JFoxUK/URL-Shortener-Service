@@ -87,6 +87,7 @@ app.use(function (req, res, next) {
   if(globalUser){
     userUrlsData = getURLData().then(urlDataRes => {
       console.log(JSON.stringify('WHERE ARE THE DUPLICATES???? >>>>>> ' + urlDataRes.rows));
+      myURLsData = [];
       urlDataRes.rows.forEach(row => {
         let userUrlsData = {
           "longurl" : row.long_url,
