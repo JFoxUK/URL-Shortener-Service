@@ -11,11 +11,4 @@ $(window).on("load", function () {
 		$(".form").removeClass("hidden");
 		$(".url-container").addClass("hidden");
 	});
-   $("#shorten-url_form").on("submit", function () {
-      setTimeout(function () {
-         console.log('HERE');
-         window.location.href = "/home";
-         
-     }, 10000);
-    });
 });
