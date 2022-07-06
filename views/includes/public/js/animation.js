@@ -11,7 +11,7 @@ $(window).on("load", function () {
 		$(".form").removeClass("hidden");
 		$(".url-container").addClass("hidden");
 	});
-   $( "#createURLButton" ).on("submit", function () {
+   $("#shorten-url_form").on("submit", function () {
       alert( "Handler for .submit() called." );
     });
 });
