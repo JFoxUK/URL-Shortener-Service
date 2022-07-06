@@ -164,9 +164,14 @@ router.get('/r/:shortUrl', function(req, res) {
   connectDatabase.then(
     checkDatabase(req.params.shortUrl, false)
       .then( datdabaseRes => {
-        res.redirect(datdabaseRes);
+        let clicksForUpdate = datdabaseRes.rows[0].number_of_clicks + 1;
+        incrementClicks(datdabaseRes.rows[0].id, clicksForUpdate)
+        .then(res.redirect(() => {
+          datdabaseRes.rows[0].long_url
+        })
+        )
       })
-      .catch(e => {E
+      .catch(e => {
         res.locals.messageShow = true;
         res.locals.message = e;
         res.render("index.pug");
@@ -204,6 +209,23 @@ var connectDatabase = new Promise(function(resolve, reject){
   }
 });
 
+function incrementClicks(UrlRecordId, numberOfClicksForUpdate){
+  return new Promise(function(resolve, reject){
+    let queryString = `UPDATE url_store SET number_of_clicks ${numberOfClicksForUpdate} WHERE id = \'${UrlRecordId}\'`;
+    pool.query(queryString)
+    .then(res => {
+      console.error(JSON.stringify(res));
+      resolve(res);
+
+    })
+    .catch(e => {
+      console.error(e);
+      reject(e);
+    })
+
+  })
+}
+
 var checkDatabase = function(shortUrl, isCreate) {
 
   if(!isCreate){
@@ -215,7 +237,7 @@ var checkDatabase = function(shortUrl, isCreate) {
     pool.query(queryString)
     .then(res => {
       if(res.rows.length > 0){
-        resolve(res.rows[0].long_url);
+        resolve(res);
       }else{
         reject(NO_RECORD_FOUND_MESSAGE); 
       }
