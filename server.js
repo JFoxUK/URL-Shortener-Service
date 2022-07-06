@@ -161,22 +161,18 @@ router.post('/create', function(req, res) {
 
 
 router.get('/r/:shortUrl', function(req, res) {
-  connectDatabase.then( () => {
+  connectDatabase.then(
     checkDatabase(req.params.shortUrl, false)
-  })
-    .then( datdabaseRes => {
-      let clicksForUpdate = datdabaseRes.rows[0].number_of_clicks + 1;
-      incrementClicks(datdabaseRes.rows[0].id, clicksForUpdate);
-      return datdabaseRes.rows[0];
-    })
-      .then(() => {
-        res.redirect(datdabaseRes.rows[0].long_url);
+      .then( datdabaseRes => {
+        incrementClicks(datdabaseRes.rows[0].id, clicksForUpdate);
+        res.redirect(datdabaseRes);
       })
-    .catch(e => {
-      res.locals.messageShow = true;
-      res.locals.message = e;
-      res.render("index.pug");
-    })
+      .catch(e => {
+        res.locals.messageShow = true;
+        res.locals.message = e;
+        res.render("index.pug");
+      })
+  )
 });
 
 router.get('*', function(req, res){
