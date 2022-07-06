@@ -165,7 +165,10 @@ router.get('/r/:shortUrl', function(req, res) {
     checkDatabase(req.params.shortUrl, false)
       .then( datdabaseRes => {
         console.log('>>>>> ' + JSON.stringify(datdabaseRes));
-        let clicksForUpdate = datdabaseRes.rows[0].number_of_clicks + 1;
+        console.log('>>>>> ' + JSON.stringify(datdabaseRes.rows[0].number_of_clicks));
+        console.log('>>>>> ' + JSON.stringify(datdabaseRes.rows[0].id));
+        let clicksForUpdate = parseInt(datdabaseRes.rows[0].number_of_clicks) + 1;
+        
         incrementClicks(datdabaseRes.rows[0].id, clicksForUpdate)
         .then(() => {
           res.redirect(datdabaseRes.rows[0].long_url);
