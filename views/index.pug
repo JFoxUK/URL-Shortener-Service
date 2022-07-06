@@ -14,35 +14,35 @@ html
 			.form-box
 				h2
 					| URL Shortener
-					.tooltip-container-info
-						a.tooltip-info(href="#")
-							span
-							span
-							span
-							span
-							| INFO
-					.tooltip-container-back.hidden
-						a.tooltip-back(href="#")
-							span
-							span
-							span
-							span
-							| BACK
-					.login_button-container
-						if user
-							a.login_button(href="/logout")
-								span
-								span
-								span
-								span
-								| LOGOUT
-						else
-							a.login_button(href="/login")
-								span
-								span
-								span
-								span
-								| LOGIN
+                .tooltip-container-info
+                    a.tooltip-info(href="#")
+                        span
+                        span
+                        span
+                        span
+                        | INFO
+                .tooltip-container-back.hidden
+                    a.tooltip-back(href="#")
+                        span
+                        span
+                        span
+                        span
+                        | BACK
+                .login_button-container
+                    if user
+                        a.login_button(href="/logout")
+                            span
+                            span
+                            span
+                            span
+                            | LOGOUT
+                    else
+                        a.login_button(href="/login")
+                            span
+                            span
+                            span
+                            span
+                            | LOGIN
 				if user
 					p.toast-message 
 						| Logged in as #{user.email}
