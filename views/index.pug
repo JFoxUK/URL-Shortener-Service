@@ -99,8 +99,8 @@ html
                             | Please Login to see your URLs.
 
         script.
-            function copyToClipboard(){
-                    navigator.clipboard.writeText()
+            function copyToClipboard(createdURL){
+                    navigator.clipboard.writeText(createdURL);
             }
         script(
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
