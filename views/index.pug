@@ -53,7 +53,7 @@ html
                     p.toast-message #{message}
                     p.toast-message #{createdURL}
                         button.copy-button
-						| Click to copy!
+						    | Click to copy!
                 form#shorten-url_form.form(action="/create", method="POST")
                     .url-box
                         input(type="url", pattern="https://.*", name="longUrl", required)
