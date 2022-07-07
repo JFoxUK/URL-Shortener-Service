@@ -11,4 +11,7 @@ $(window).on("load", function () {
 		$(".form").removeClass("hidden");
 		$(".url-container").addClass("hidden");
 	});
+   $(".copy-button").on("click", function () {
+      $(".copy-button").text() = 'Copied!';
+   });
 });
