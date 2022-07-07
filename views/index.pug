@@ -50,8 +50,8 @@ html
                 if (messageShow == true) && (isError == true)
                     p.toast-message #{message}
                 if (messageShow == true) && (isError == false)
-                    p.toast-message #{message}
-                    p.toast-message #{createdURL}
+                    p.toast-message.info-short-url-message #{message}
+                    p.toast-message.short-url-message #{createdURL}
                         button.copy-button
                             | Click to copy!
                 form#shorten-url_form.form(action="/create", method="POST")
