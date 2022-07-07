@@ -37,14 +37,15 @@ i.fa-solid.fa-arrows-rotate {
 .copy-button{
 	margin-left: 2%;
     border-radius: 5px;
+	border: none;
     background: #d97442;
     color: #f1eee6;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
     transition: 0.5s;
-    font-size: 10px;
-	padding: 3%;
+    font-size: 8px;
+	padding: 2%;
 	margin: 0;
 }
 .copy-button:hover{
