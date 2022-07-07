@@ -52,7 +52,7 @@ html
                 if (messageShow == true) && (isError == false)
                     p.toast-message.info-short-url-message #{message}
                     p.toast-message.short-url-message #{createdURL}
-                    button.copy-button(onclick=`copyToClipboard((${createdURL}).toString())`)
+                    button.copy-button(onclick=`copyToClipboard(\'${createdURL}\')`)
                         | Click to copy!
                 form#shorten-url_form.form(action="/create", method="POST")
                     .url-box
