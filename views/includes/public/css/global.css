@@ -19,11 +19,11 @@ i.fa-solid.fa-arrows-rotate {
 	color: #f1eee6;
 }
 
-.error-message, .short-url-message{
+.error-message, .short-url-message, .logged-in-message{
 	color: #d97442;
 }
 
-.error-message, .short-url-message, .info-short-url-message{
+.error-message, .short-url-message, .info-short-url-message, .logged-in-message{
 	font-size: 10px;
 }
 
@@ -37,6 +37,8 @@ i.fa-solid.fa-arrows-rotate {
     overflow: hidden;
     transition: 0.5s;
     font-size: 12px;
+	padding: 3%;
+	margin: 0;
 }
 .copy-button:hover{
 	background: #d97442;
