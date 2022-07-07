@@ -14,6 +14,29 @@ i.fa-solid.fa-arrows-rotate {
 	padding: 5%;
 }
 
+.info-short-url-message{
+	padding-top: 2vh;
+	color: #f1eee6;
+}
+
+.copy-button{
+	margin-left: 1vw;
+    border: none;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    font-size: 12px;
+}
+.copy-button{
+	background: #d97442;
+    color: #f1eee6;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #d97442, 0 0 25px #d97442, 0 0 50px #d97442, 0 0 100px #d97442;
+}
+
 .hidden {
 	display: none;
 }
