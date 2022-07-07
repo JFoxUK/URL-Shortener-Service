@@ -20,7 +20,7 @@ i.fa-solid.fa-arrows-rotate {
 }
 
 .copy-button{
-	margin-left: 1vw;
+	margin-left: 2%;
     border: none;
     background-color: transparent;
     color: white;
@@ -30,7 +30,7 @@ i.fa-solid.fa-arrows-rotate {
     transition: 0.5s;
     font-size: 12px;
 }
-.copy-button{
+.copy-button:hover{
 	background: #d97442;
     color: #f1eee6;
     border-radius: 5px;
