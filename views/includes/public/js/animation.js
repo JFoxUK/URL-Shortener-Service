@@ -11,6 +11,7 @@ $(window).on("load", function () {
 	$(".tooltip-back").on("click", function () {
 		$(".tooltip-container-back").addClass("hidden");
 		$(".tooltip-container-info").removeClass("hidden");
+      $(".form").removeClass("hidden");
 		$(".error-message").removeClass("hidden");
       $(".info-short-url-message").removeClass("hidden");
       $(".short-url-message").removeClass("hidden");
