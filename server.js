@@ -134,17 +134,22 @@ router.post('/create', function(req, res) {
             insertDatabase(shortUrl, longUrl)
               .then( () => {
                 res.locals.messageShow = true;
-                res.locals.message = 'Short URL created - ' + req.get('host') + '/r/' + shortUrl;
+                res.locals.isError = false;
+                res.locals.message = 'Short URL created!';
+                res.locals.createdURL = req.get('host') + '/r/' + shortUrl;
+                res.locals.isCreateRoute = true;
                 res.render("index.pug");
               })
               .catch(e => {
                 res.locals.messageShow = true;
+                res.locals.isError = true;
                 res.locals.message = e;
                 res.render("index.pug");
               })
           )
         }else{
           res.locals.messageShow = true;
+          res.locals.isError = true;
           res.locals.message = 'Short URL already exists';
           res.render("index.pug");
         }
@@ -152,6 +157,7 @@ router.post('/create', function(req, res) {
       .catch(e => {
         console.error(e);
         res.locals.messageShow = true;
+        res.locals.isError = true;
         res.locals.message = e;
         res.render("index.pug");
       })
@@ -177,6 +183,7 @@ router.get('/r/:shortUrl', function(req, res) {
       })
       .catch(e => {
         res.locals.messageShow = true;
+        res.locals.isError = true;
         res.locals.message = e;
         res.render("index.pug");
       })
@@ -191,6 +198,7 @@ router.get('*', function(req, res){
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.locals.messageShow = true;
+  res.locals.isError = true;
   res.locals.message = err.message;
   res.render("index.pug");
   

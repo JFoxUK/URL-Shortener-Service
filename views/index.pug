@@ -2,18 +2,19 @@ doctype html
 html
     head
         title JFoxUK URL Shortening Service
-        meta(
-            name="description",
-            content="URL Shortener created by Jonathan Fox (@JFoxUK). Can be likened to the popular bit.ly, sfdc.co, etc"
-        )
+        meta(name="description", content="URL Shortener created by Jonathan Fox (@JFoxUK). Can be likened to the popular bit.ly, sfdc.co, etc")
         meta(charset="utf-8")
         link(rel="icon", type="image/x-icon", href="/images/JFoxUK_logo.png")
         link(rel="stylesheet", href="/css/global.css")
+        script(src="https://kit.fontawesome.com/1dd9a88bec.js", crossorigin="anonymous")
     body
         .full-container
             .form-box
                 h2
                     | URL Shortener
+                    if isCreateRoute == true
+                        a(href='/home')
+                            i.fa-solid.fa-arrows-rotate
                 .tooltip-container-info
                     a.tooltip-info(href="#")
                         span
@@ -46,8 +47,13 @@ html
                 if user
                     p.toast-message 
                         | Logged in as #{user.email}
-                if messageShow == true
+                if (messageShow == true) && (isError == true)
                     p.toast-message #{message}
+                if (messageShow == true) && (isError == false)
+                    p.toast-message #{message}
+                    p.toast-message #{createdURL}
+                        button.copy-button
+						| Click to copy!
                 form#shorten-url_form.form(action="/create", method="POST")
                     .url-box
                         input(type="url", pattern="https://.*", name="longUrl", required)

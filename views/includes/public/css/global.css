@@ -9,6 +9,11 @@ body {
 	background: #293348;
 }
 
+i.fa-solid.fa-arrows-rotate {
+	color: #f1eee6;
+	padding: 5%;
+}
+
 .hidden {
 	display: none;
 }
