@@ -45,14 +45,14 @@ html
                             span
                             | LOGIN
                 if user
-                    p.toast-message 
+                    p.toast-message.logged-in-message 
                         | Logged in as #{user.email}
                 if (messageShow == true) && (isError == true)
                     p.toast-message.error-message #{message}
                 if (messageShow == true) && (isError == false)
                     p.toast-message.info-short-url-message #{message}
                     p.toast-message.short-url-message #{createdURL}
-                    button.copy-button(onclick="copyToClipboard('#{createdURL}')")
+                    button.copy-button(onclick="copyToClipboard(#{createdURL})")
                         | Click to copy!
                 form#shorten-url_form.form(action="/create", method="POST")
                     .url-box
