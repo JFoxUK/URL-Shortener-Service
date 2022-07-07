@@ -19,11 +19,11 @@ i.fa-solid.fa-arrows-rotate {
 	color: #f1eee6;
 }
 
-.error-message, .short-url-message, .logged-in-message{
+.error-message, .short-url-message, .logged-in-message, .login-required-message {
 	color: #d97442;
 }
 
-.error-message, .short-url-message, .info-short-url-message, .logged-in-message{
+.error-message, .short-url-message, .info-short-url-message, .logged-in-message, .login-required-message {
 	font-size: 10px;
 }
 
