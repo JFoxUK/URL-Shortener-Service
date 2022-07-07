@@ -14,6 +14,6 @@ $(window).on("load", function () {
 		$(".url-container").addClass("hidden");
 	});
    $(".copy-button").on("click", function () {
-      $(".copy-button").text() = 'Copied!';
+      $(".copy-button").html("Copied!");
    });
 });
