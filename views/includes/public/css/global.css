@@ -19,11 +19,18 @@ i.fa-solid.fa-arrows-rotate {
 	color: #f1eee6;
 }
 
-.error-message, .short-url-message, .logged-in-message, .login-required-message {
+.error-message, 
+.short-url-message, 
+.logged-in-message, 
+.login-required-message {
 	color: #d97442;
 }
 
-.error-message, .short-url-message, .info-short-url-message, .logged-in-message, .login-required-message {
+.error-message, 
+.short-url-message, 
+.info-short-url-message, 
+.logged-in-message, 
+.login-required-message {
 	font-size: 10px;
 }
 
@@ -84,8 +91,6 @@ i.fa-solid.fa-arrows-rotate {
 	margin-top: 40px;
 }
 
-
-
 .tooltip-info:hover,
 .tooltip-back:hover,
 .login_button:hover,
@@ -101,6 +106,7 @@ i.fa-solid.fa-arrows-rotate {
 	height: 20vh;
 	overflow-y: scroll;
 }
+
 .dataTableDiv-table {
 	border-collapse: collapse;
 	table-layout: fixed;
@@ -122,6 +128,7 @@ i.fa-solid.fa-arrows-rotate {
 	word-wrap: break-word;
 	text-align: center;
 }
+
 .dataTableDiv-data-url,
 .dataTableDiv-data-url a:link,
 .dataTableDiv-data-url a:active,
@@ -129,13 +136,16 @@ i.fa-solid.fa-arrows-rotate {
 	color: #d97442;
 	font-size: 12px;
 }
+
 .dataTableDiv-data-url a:hover {
 	color: #f1eee6;
 }
+
 .dataTableDiv-data-clicks {
 	color: #f1eee6;
 	font-size: 12px;
 }
+
 .dataTableDiv-info {
 	color: #f1eee6;
 	font-size: 12px;
