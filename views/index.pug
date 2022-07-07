@@ -48,12 +48,12 @@ html
                     p.toast-message 
                         | Logged in as #{user.email}
                 if (messageShow == true) && (isError == true)
-                    p.toast-message #{message}
+                    p.toast-message.error-message #{message}
                 if (messageShow == true) && (isError == false)
                     p.toast-message.info-short-url-message #{message}
                     p.toast-message.short-url-message #{createdURL}
-                        button.copy-button(onclick="copyToClipboard('#{createdURL}')")
-                            | Click to copy!
+                    button.copy-button(onclick="copyToClipboard('#{createdURL}')")
+                        | Click to copy!
                 form#shorten-url_form.form(action="/create", method="POST")
                     .url-box
                         input(type="url", pattern="https://.*", name="longUrl", required)
